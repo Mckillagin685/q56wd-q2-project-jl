@@ -1,0 +1,50 @@
+{
+  "name": "q56wd-q2-project-jl",
+  "version": "1.0.0",
+  "description": "Quarter 2 Project (NJG26Crux, Mckillagin685)",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mckillagin685/q56wd-q2-project-jl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mckillagin685/q56wd-q2-project-jl/issues"
+  },
+  "homepage": "https://github.com/Mckillagin685/q56wd-q2-project-jl#readme",
+  "dependencies": {
+    "bcrypt-as-promised": "^1.1.0",
+    "body-parser": "^1.15.2",
+    "boom": "^3.2.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "humps": "^1.1.0",
+    "jsonwebtoken": "^7.1.9",
+    "knex": "^0.11.7",
+    "morgan": "^1.7.0",
+    "pg": "^6.0.0",
+    "update": "^0.7.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dotenv": "^2.0.0",
+    "eslint": "^3.1.1",
+    "eslint-config-ryansobol": "^7.7.0",
+    "foreman": "^1.4.1",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.10.0",
+    "supertest": "^1.2.0"
+  },
+  "engines": {
+    "node": "7.4.0"
+  }
+}
