@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <title>JOB SEARCH - Jeff and Lucas Q2 Project</title>
     <!--Import Google Icon Font-->
-    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
 
     <!-- Import styles.css -->
-    <link type="text/css" rel="stylesheet" href="/css/styles.css"/>
+    <link type="text/css" rel="stylesheet" href="./css/styles.css"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,35 +19,96 @@
     <div class="navbar-fixed">
       <nav class="blue-grey darken-2">
         <div class="nav-wrapper">
-          <a href="/" class="brand-logo">
-            <span>
-              <img class="logo-png" src="/images/job-banner-search.jpg" />
-            </span>
-            <span class="logo-text">Job Search</span>
-          </a>
-
-          <a class="button-collapse" data-activates="mobileNav">
-            <i class="material-icons">menu</i>
-          </a>
-
-          <ul class="right hide-on-med-and-down">
-            <li><a href="/index.html">Jobs</a></li>
-            <li class="firstNavItem"></li>
-            <li class="secondNavItem"></li>
+          <a href="index.html" class="brand-logo">
+               <!-- <img src="./images/job-banner-search.jpg" alt="Job Search Logo"> -->
+             </a>
+          <ul id="nav-mobile" class="right">
+            <!-- <li><a href="#">Login</a></li> -->
+            <li><a class="helloUser"></a></li>
+            <li><a class="modal-trigger login" href="#modal1">Login</a></li>
+            <li><a class="modal-trigger logout" href="#modal1">Logout</a></li>
           </ul>
+          <!-- Modal Structure -->
+          <div id="modal1" class="modal">
+            <form id="loginForm">
+              <div class="modal-content">
+                <h4 class="grey-text">Login</h4>
+                <!-- ******************************************* -->
+                <div class="row">
+                  <div class="col s12">
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="email" type="email" class="validate black-text">
+                        <label for="email">Email</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="password" type="password" class="validate black-text">
+                        <label for="password">Password</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ******************************************* -->
+              </div>
+              <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                <a href="#modal2" class="modal-trigger modal-action modal-close waves-effect waves-green btn-flat">Sign Up</a>
+                <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">LOG IN</button>
+              </div>
+            </form>
+          </div>
+          <!-- ******************************************* -->
 
-          <ul id="mobileNav" class="side-nav">
-            <li><a href="/index.html">Jobs</a></li>
-            <li class="firstNavItem"></li>
-            <li class="secondNavItem"></li>
-          </ul>
+          <!-- Modal Structure -->
+          <div id="modal2" class="modal">
+            <form id="signUpForm">
+              <div class="modal-content">
+                <h4 class="grey-text">Sign Up</h4>
+                <!-- ******************************************* -->
+                <div class="row">
+                  <div class="col s12">
+                    <div class="row">
+                      <div class="input-field col s6">
+                        <input id="firstName" type="text" class="validate black-text">
+                        <label for="first_name">First Name</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input id="lastName" type="text" class="validate black-text">
+                        <label for="last_name">Last Name</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="emailSU" type="email" class="validate black-text">
+                        <label for="email">Email</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="passwordSU" type="password" class="validate black-text">
+                        <label for="password">Password</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ******************************************* -->
+              </div>
+              <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                <button href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">SIGN UP</button>
+              </div>
+            </form>
+          </div>
+          <!-- ******************************************* -->
         </div>
       </nav>
     </div>
 
     <main>
       <div class="parallax-container">
-        <div class="parallax"><img src="/images/***TBD***"></div>
+        <!-- <div class="parallax"><img src="/images/***TBD***"></div> -->
       </div>
 
       <div class="container">
@@ -65,9 +126,9 @@
     </footer>
 
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="/js/vendor/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="/js/vendor/materialize.min.js"></script>
-    <script src="/js/nav.js"></script>
-    <script src="/js/index.js"></script>
+    <script type="text/javascript" src="./js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="./js/vendor/materialize.min.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/index.js"></script>
   </body>
 </html>
