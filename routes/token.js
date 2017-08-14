@@ -20,6 +20,7 @@ router.get('/token', (req, res) => {
 });
 
 router.post('/token', (req, res, next) => {
+  console.log(process.env.JWT_KEY);
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {

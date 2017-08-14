@@ -73,9 +73,11 @@
 
         $.ajax(options)
           .done((user) => {
-            // console.log(user.firstName);
+            // window.location.href = '/search.html';
             let helloUser = ('hello ' + user.firstName);
             $(".helloUser").text(helloUser);
+            $(".login").hide();
+            $(".logout").show();
             // window.location.href = '/index.html';
           })
           .fail(($xhr) => {
@@ -124,8 +126,13 @@
         };
 
         $.ajax(options)
-          .done(() => {
-            window.location.href = '/index.html';
+          .done((user) => {
+            window.location.href = '/search.html';
+            let helloUser = ('hello ' + user.firstName);
+            $(".helloUser").text(helloUser);
+            $(".login").hide();
+            $(".logout").show();
+
           })
           .fail(($xhr) => {
             Materialize.toast($xhr.responseText, 3000);

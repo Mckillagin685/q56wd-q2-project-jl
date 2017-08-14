@@ -10,6 +10,30 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
+router.get('/users', (req, res, next) => {
+  knex('users')
+    .then((result) => {
+      res.send(result)
+    })
+    .catch((err) => next(err))
+})
+
+router.get('/users/:id', (req, res, next) => {
+  knex('users')
+    .where('id', req.params.id)
+    .first()
+    .then((result) => {
+      if (!result) {
+        return next();
+      }
+
+      res.send(result);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.post('/users', (req, res, next) => {
   const { email, password } = req.body;
 

@@ -8,6 +8,7 @@
 
   $.getJSON('/user')
     .done((user) => {
+      console.log(user);
       const $helloUser = $('.helloUser');
       const firstName = ('hello ' + user[0].first_name);
       // console.log('user: ', user);
