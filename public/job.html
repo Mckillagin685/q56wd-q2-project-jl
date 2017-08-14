@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
     <!-- <script src="./js/nav.js"></script> -->
-    <script defer src="./js/index.js"></script>
+    <script defer src="./js/job.js"></script>
 
 
     <!--Import materialize.css-->
@@ -25,7 +25,13 @@
     <div class="navbar-fixed">
       <nav class="blue-grey darken-2">
         <div class="nav-wrapper">
-          <a href="index.html" class="brand-logo">
+          <ul id="nav-mobile" class="left">
+            <!-- <li><a href="#">Login</a></li> -->
+            <!-- <li><a class="helloUser"></a></li> -->
+            <li><a class="modal-trigger" href="#modal4">Messages</a></li>
+            <li><a class="modal-trigger" href="favs.html">Favorites</a></li>
+          </ul>
+          <a href="index.html" class="brand-logo">Job Search
                <!-- <img src="./images/job-banner-search.jpg" alt="Job Search Logo"> -->
              </a>
           <ul id="nav-mobile" class="right">
@@ -118,8 +124,9 @@
       </div>
 
       <div class="container">
-        <h2>JOBS</h2>
-
+        <h2>JOB</h2>
+        <a href="review.html">Review</a>
+        <a href="jobs.html">Back</a>
         <div id="jobs" class="row"></div>
       </div>
 
