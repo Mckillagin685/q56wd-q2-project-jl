@@ -7,8 +7,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "heroku-postbuild": "knex migrate:latest",
+    "knex": "knex",
+    "nf": "nf start",
+    "start": "nodemon server.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -29,7 +32,7 @@
     "express": "^4.15.4",
     "humps": "^1.1.0",
     "jsonwebtoken": "^7.1.9",
-    "knex": "^0.11.7",
+    "knex": "^0.11.10",
     "morgan": "^1.7.0",
     "pg": "^6.0.0",
     "update": "^0.7.4"
