@@ -1,3 +1,7 @@
+.progress {
+  visibility: hidden;
+}
+
 body {
   flex-direction: column;
   display: flex;
