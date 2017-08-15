@@ -20,7 +20,6 @@ router.get('/token', (req, res) => {
 });
 
 router.post('/token', (req, res, next) => {
-  console.log(process.env.JWT_KEY);
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
@@ -46,7 +45,7 @@ router.post('/token', (req, res, next) => {
       return bcrypt.compare(password, user.hashedPassword);
     })
     .then(() => {
-      const claim = { userId: user.id };
+      const claim = { userId: user.id};
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days'
       });
