@@ -10,16 +10,18 @@ const axios = require('axios');
 
 const router = express.Router();
 
-router.get('/glassdoor', (req, res, next) => {
-  console.log(req.ip, req.connection.remoteAddress);
-  axios.get('/http://api.glassdoor.com/api/api.htm?t.p=182724&t.k=dnxzk0MPf7A&userip=0.0.0.0&useragent=chrome&format=json&v=1&action=employers&q=Aricent')
+router.get('/glassdoor/:company', (req, res, next) => {
+  // console.log(req.ip, req.connection.remoteAddress);
+  axios.get(`http://api.glassdoor.com/api/api.htm?t.p=182724&t.k=dnxzk0MPf7A&userip=64.125.192.130&useragent=chrome&format=json&v=1&action=employers&q='${req.params.company}&exactMatch=true'`)
     .then(function (response) {
-      console.log(response);
+      console.log('req: ' + req.params.company);
+      console.log(response.data.response.employers);
+      res.send(response.data.response.employers);
     })
     .catch(function (err) {
       console.log(err);
     })
-  res.send(200)
+  // res.send(200)
 })
 
 

@@ -79,7 +79,7 @@ $('#loginForm').submit((event) => {
       // console.log(user.firstName);
       let helloUser = ('hello ' + user.firstName);
       $(".helloUser").text(helloUser);
-      // window.location.href = '/index.html';
+      window.location.href = '/search.html';
     })
     .fail(($xhr) => {
       Materialize.toast($xhr.responseText, 3000);
@@ -133,7 +133,7 @@ $('#signUpForm').submit((event) => {
 
   $.ajax(options)
     .done(() => {
-      window.location.href = '/index.html';
+      window.location.href = '/search.html';
     })
     .fail(($xhr) => {
       Materialize.toast($xhr.responseText, 3000);
@@ -286,7 +286,7 @@ const renderJobs = function() {
 
       if (jobs[i].url === jobUrl) {
         jobTitle = jobs[i].title
-        console.log('jobTitle: ' + jobTitle);
+        // console.log('jobTitle: ' + jobTitle);
         jobCompany = jobs[i].company
         jobLocation = jobs[i].location
         jobDate = jobs[i].date
@@ -311,9 +311,9 @@ const renderJobs = function() {
         $thead.append($tr)
         $table.append($thead)
         $table.append($tbody)
-        jobsTable.append($table).attr('class', 'getJobCompany')
+        jobsTable.append($table)
 
-        console.log(jobTitle);
+        // console.log(jobTitle);
 
         let $jobTitle = $('<a>').text(jobTitle).attr({
           href: job.url,
@@ -321,7 +321,7 @@ const renderJobs = function() {
         })
         let $tdT = $('<td>')
         let $tdC = $('<td>')
-        let $jobCompany = $('<button>').text(jobCompany)
+        let $jobCompany = $('<button>').attr('id', 'getJobCompany').text(jobCompany)
         let $jobLocation = $('<td>').text(jobLocation)
         let $jobDate = $('<td>').text(jobDate)
         $tr = $('<tr>')
@@ -335,24 +335,48 @@ const renderJobs = function() {
         $tr.append($jobDate)
         tBody.append($tr)
 
+        const $divJobFooter = $('<div>').attr('id', 'jobFooter')
+        const $backButton = $('<button>').text('Back to Summary').attr('id', 'jobBackToJobs')
+        const $favoriteButton = $('<button>').text('Add to Favorites')
+        const $divGlassDoor = $('<div>').attr('id', 'glassDoor')
+
+        $divJobFooter.append($backButton)
+        $divJobFooter.append($favoriteButton)
+        jobsTable.append($divJobFooter)
+        jobsTable.append($divGlassDoor)
+
         $('#job').slideDown('slow')
-  })
 
-  $(".getJobCompany").click(function(event) {
-    event.preventDefault();
-    // glassDoor
-    $("#glassDoor").empty();
+        $("#jobBackToJobs").click(function(event) {
+          event.preventDefault();
 
-    $('#glassDoor').slideUp('slow')
+          $('#job').slideUp('slow')
+          $('#jobs').slideDown('slow')
+        })
 
-    const jobCompany = event.target.text
+        $("#getJobCompany").click(function(event) {
+          event.preventDefault();
+          // glassDoor
+          $("#glassDoor").empty();
 
-    alert(jobCompany)
+          $('#glassDoor').slideUp('slow')
 
-    // var searchStringCompany =
+          // console.log($(event.target).text());
 
-    // var $xhr = $.getJSON(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?${searchStringCompany}`);
+          const jobCompany = $(event.target).text()
 
-  })
+          // alert(jobCompany)
 
-}
+          $.getJSON('/glassdoor/' + jobCompany)
+            .done((companies) => {
+              console.log(companies);
+
+              // for 
+
+            })
+
+          })
+
+        })
+
+      }

@@ -38,27 +38,35 @@
   </div>
 
   <main>
-    <div class="parallax-container">
+    <div class="container">
       <!-- <div class="parallax"><img src="/images/***TBD***"></div> -->
 
       <div class="row">
-        <form class="col s12">
+        <form id="getJobs" class="col s12">
           <div class="row">
-            <div class="input-field col s6">
-              <input placeholder="Web Developer" id="first_name" type="text" class="validate">
+            <div class="input-field col s5">
+              <input placeholder="Web Developer" id="title" type="text" class="validate" value="Web Developer">
               <label for="first_name">Job Title</label>
             </div>
-            <div class="input-field col s6">
-              <input placeholder="Seattle, WA"  id="last_name" type="text" class="validate">
+            <div class="input-field col s5">
+              <input placeholder="Seattle, WA" id="location" type="text" class="validate" value="98104">
               <label for="last_name">City, State</label>
+            </div>
+            <div class="col s2">
+              <div class="valign-wrapper">
+                <div>
+                  <button type="submit" name="action">Search</button>
+                </div>
+                <div class="progress">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
             </div>
           </div>
         </form>
       </div>
 
-      </div>
-
-      <div class="container">
+      <!-- <div class="container"> -->
         <h2>Search</h2>
         <a href="jobs.html">Jobs</a>
         <div id="jobs" class="row"></div>

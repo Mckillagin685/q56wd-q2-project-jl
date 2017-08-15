@@ -101,7 +101,7 @@ $(document).ready(function(){
 
       $.ajax(options)
         .done((user) => {
-          window.location.href = '/index.html';
+          window.location.href = '/search.html';
         })
         .fail(($xhr) => {
           Materialize.toast($xhr.responseText, 3000);
@@ -132,7 +132,7 @@ $(document).ready(function(){
 
       $.ajax(options)
         .done((user) => {
-          window.location.href = '/index.html';
+          window.location.href = '/search.html';
         })
         .fail(($xhr) => {
           Materialize.toast($xhr.responseText, 3000);
