@@ -14,8 +14,8 @@ router.get('/glassdoor/:company', (req, res, next) => {
   // console.log(req.ip, req.connection.remoteAddress);
   axios.get(`http://api.glassdoor.com/api/api.htm?t.p=182724&t.k=dnxzk0MPf7A&userip=64.125.192.130&useragent=chrome&format=json&v=1&action=employers&q='${req.params.company}&exactMatch=true'`)
     .then(function (response) {
-      console.log('req: ' + req.params.company);
-      console.log(response.data.response.employers);
+      // console.log('req: ' + req.params.company);
+      // console.log(response.data.response.employers);
       res.send(response.data.response.employers);
     })
     .catch(function (err) {

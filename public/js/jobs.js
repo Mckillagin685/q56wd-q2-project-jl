@@ -1,4 +1,3 @@
-
 'use strict';
 
 // $('.parallax').parallax();
@@ -280,7 +279,7 @@ const renderJobs = function() {
 
     // console.log(jobs.length);
 
-    for (let i=0 ; i<jobs.length ; i++) {
+    for (let i = 0; i < jobs.length; i++) {
       // console.log(jobs[i]);
       // console.log(jobs[i].id);
 
@@ -290,93 +289,125 @@ const renderJobs = function() {
         jobCompany = jobs[i].company
         jobLocation = jobs[i].location
         jobDate = jobs[i].date
-        }
       }
+    }
 
 
-        const jobsTable = $('#job')
-        const $table = $('<table>')
-        const $thead = $('<thead>')
-        let $tr = $('<tr>')
-        const $thTitle = $('<th>').text('Job Title')
-        const $thCompany = $('<th>').text('Company')
-        const $thLocation = $('<th>').text('Location')
-        const $thDate = $('<th>').text('Date Posted')
-        const $tbody = $('<tbody>').attr('id', 'jobTableBody')
+    const jobsTable = $('#job')
+    const $table = $('<table>')
+    const $thead = $('<thead>')
+    let $tr = $('<tr>')
+    const $thTitle = $('<th>').text('Job Title')
+    const $thCompany = $('<th>').text('Company')
+    const $thLocation = $('<th>').text('Location')
+    const $thDate = $('<th>').text('Date Posted')
+    const $tbody = $('<tbody>').attr('id', 'jobTableBody')
 
-        $tr.append($thTitle)
-        $tr.append($thCompany)
-        $tr.append($thLocation)
-        $tr.append($thDate)
-        $thead.append($tr)
-        $table.append($thead)
-        $table.append($tbody)
-        jobsTable.append($table)
+    $tr.append($thTitle)
+    $tr.append($thCompany)
+    $tr.append($thLocation)
+    $tr.append($thDate)
+    $thead.append($tr)
+    $table.append($thead)
+    $table.append($tbody)
+    jobsTable.append($table)
 
-        // console.log(jobTitle);
+    // console.log(jobTitle);
 
-        let $jobTitle = $('<a>').text(jobTitle).attr({
-          href: job.url,
-          target: '_blank'
+    let $jobTitle = $('<a>').text(jobTitle).attr({
+      href: job.url,
+      target: '_blank'
+    })
+    let $tdT = $('<td>')
+    let $tdC = $('<td>')
+    let $jobCompany = $('<button>').attr('id', 'getJobCompany').text(jobCompany)
+    let $jobLocation = $('<td>').text(jobLocation)
+    let $jobDate = $('<td>').text(jobDate)
+    $tr = $('<tr>')
+    let tBody = $('#jobTableBody')
+
+    $tdT.append($jobTitle)
+    $tr.append($tdT)
+    $tdC.append($jobCompany)
+    $tr.append($tdC)
+    $tr.append($jobLocation)
+    $tr.append($jobDate)
+    tBody.append($tr)
+
+    const $divJobFooter = $('<div>').attr('id', 'jobFooter')
+    const $backButton = $('<button>').text('Back to Summary').attr('id', 'jobBackToJobs')
+    const $favoriteButton = $('<button>').text('Add to Favorites')
+    const $divGlassDoor = $('<div>').attr('id', 'glassDoor')
+
+    $divJobFooter.append($backButton)
+    $divJobFooter.append($favoriteButton)
+    jobsTable.append($divJobFooter)
+    jobsTable.append($divGlassDoor)
+
+    $('#job').slideDown('slow')
+
+    $("#jobBackToJobs").click(function(event) {
+      event.preventDefault();
+
+      $('#job').slideUp('slow')
+      $('#jobs').slideDown('slow')
+    })
+
+    $("#getJobCompany").click(function(event) {
+      event.preventDefault();
+      // glassDoor
+      $("#glassDoor").empty();
+
+      $('#glassDoor').slideUp('slow')
+
+      // console.log($(event.target).text());
+
+      const jobCompany = $(event.target).text()
+
+      // alert(jobCompany)
+
+      $.getJSON('/glassdoor/' + jobCompany)
+        .done((GDComp) => {
+          // console.log(company);
+
+          const company = GDComp[0];
+
+          // const newGreenDoor = {
+          //   careerOpportunitiesRating: company[0].careerOpportunitiesRating,
+          //   // ceo:{name: "Harold M. Messmer, Jr", title: "Chairman and CEO", numberOfRatings: 141, pctApprove: 72, pctDisapprove: 28, …}
+          //   compensationAndBenefitsRating: company[0].compensationAndBenefitsRating,
+          //   cultureAndValuesRating: company[0].cultureAndValuesRating,
+          //   // exactMatch:true
+          //   // featuredReview:{attributionURL: "http://www.glassdoor.com/Reviews/Employee-Review-Robert-Half-Technology-RVW16354980.htm", id: 16354980, currentJob: false, reviewDateTime: "2017-08-14 14:07:14.01", jobTitle: "Employee", …}
+          //   id: company[0].id,
+          //   industry: company[0].industry,
+          //   // industryId:200032
+          //   // industryName:"Staffing & Outsourcing"
+          //   // isEEP:true
+          //   name: company[0].name,
+          //   numberOfRatings: company[0].numberOfRatings,
+          //   overallRating: company[0].overallRating,
+          //   ratingDescription: company[0].ratingDescription,
+          //   recommendToFriendRating: company[0].recommendToFriendRating,
+          //   // sectorId:10006
+          //   sectorName: company[0].sectorName,
+          //   seniorLeadershipRating: company[0].seniorLeadershipRating,
+          //   squareLogo: company[0].squareLogo,
+          //   website: company[0].website,
+          //   workLifeBalanceRating: company[0].workLifeBalanceRating
+          // };
+
+          console.log(GDComp);
+          console.log('company: ' + company.name);
+
+          // jobs = newJobs;
+          // renderJobs();
+          // $('.progress').css('visibility', 'hidden');
+
         })
-        let $tdT = $('<td>')
-        let $tdC = $('<td>')
-        let $jobCompany = $('<button>').attr('id', 'getJobCompany').text(jobCompany)
-        let $jobLocation = $('<td>').text(jobLocation)
-        let $jobDate = $('<td>').text(jobDate)
-        $tr = $('<tr>')
-        let tBody = $('#jobTableBody')
 
-        $tdT.append($jobTitle)
-        $tr.append($tdT)
-        $tdC.append($jobCompany)
-        $tr.append($tdC)
-        $tr.append($jobLocation)
-        $tr.append($jobDate)
-        tBody.append($tr)
+    })
 
-        const $divJobFooter = $('<div>').attr('id', 'jobFooter')
-        const $backButton = $('<button>').text('Back to Summary').attr('id', 'jobBackToJobs')
-        const $favoriteButton = $('<button>').text('Add to Favorites')
-        const $divGlassDoor = $('<div>').attr('id', 'glassDoor')
+  })
 
-        $divJobFooter.append($backButton)
-        $divJobFooter.append($favoriteButton)
-        jobsTable.append($divJobFooter)
-        jobsTable.append($divGlassDoor)
-
-        $('#job').slideDown('slow')
-
-        $("#jobBackToJobs").click(function(event) {
-          event.preventDefault();
-
-          $('#job').slideUp('slow')
-          $('#jobs').slideDown('slow')
-        })
-
-        $("#getJobCompany").click(function(event) {
-          event.preventDefault();
-          // glassDoor
-          $("#glassDoor").empty();
-
-          $('#glassDoor').slideUp('slow')
-
-          // console.log($(event.target).text());
-
-          const jobCompany = $(event.target).text()
-
-          // alert(jobCompany)
-
-          $.getJSON('/glassdoor/' + jobCompany)
-            .done((companies) => {
-              console.log(companies);
-
-              // for 
-
-            })
-
-          })
-
-        })
-
-      }
+}
