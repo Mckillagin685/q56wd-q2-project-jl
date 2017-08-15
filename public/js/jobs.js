@@ -262,7 +262,7 @@ const renderJobs = function() {
   const jobsTable = $('#jobs')
   const $table = $('<table>').attr("class", "striped")
   const $thead = $('<thead>')
-  const $tr = $('<tr>')
+  let $tr = $('<tr>')
   const $thTitle = $('<th>').text('Job Title')
   const $thCompany = $('<th>').text('Company')
   const $thLocation = $('<th>').text('Location')
@@ -310,6 +310,10 @@ const renderJobs = function() {
 
     $("#job").empty();
 
+    $('#jobs').slideUp('slow')
+
+    $('#job').slideUp('slow')
+
     const jobUrl = event.target.id
     let jobTitle = ''
     let jobCompany = ''
@@ -317,12 +321,54 @@ const renderJobs = function() {
     let jobDate = ''
 
     for (let i=0 ; i<jobs.length ; i++) {
+      console.log(jobs[i]);
       if (jobs[i].id === jobUrl) {
         jobTitle = jobs[i].title
         jobCompany = jobs[i].company
         jobLocation = jobs[i].location
         jobDate = jobs[i].date
+        }
       }
-    }
+      console.log(jobTitle);
+
+        const jobsTable = $('#job')
+        const $table = $('<table>')
+        const $thead = $('<thead>')
+        let $tr = $('<tr>')
+        const $thTitle = $('<th>').text('Job Title')
+        const $thCompany = $('<th>').text('Company')
+        const $thLocation = $('<th>').text('Location')
+        const $thDate = $('<th>').text('Date Posted')
+        const $tbody = $('<tbody>')
+
+        $tr.append($thTitle)
+        $tr.append($thCompany)
+        $tr.append($thLocation)
+        $tr.append($thDate)
+        $thead.append($tr)
+        $table.append($thead)
+        $table.append($tbody)
+        jobsTable.append($table).attr('class', 'getJob')
+
+        let $jobTitle = $('<button>').text(jobTitle).attr({
+          href: job.url,
+          target: '_blank'
+        })
+        let $td = $('<td>')
+        let $jobCompany = $('<td>').text(jobCompany)
+        let $jobLocation = $('<td>').text(jobLocation)
+        let $jobDate = $('<td>').text(jobDate)
+        $tr = $('<tr>')
+        let tBody = $('#tableBody')
+
+        $td.append($jobTitle)
+        $tr.append($td)
+        $tr.append($jobCompany)
+        $tr.append($jobLocation)
+        $tr.append($jobDate)
+        tBody.append($tr)
+
+        $('#job').slideDown('slow')
+
   })
 }
