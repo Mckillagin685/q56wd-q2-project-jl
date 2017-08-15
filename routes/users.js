@@ -10,6 +10,36 @@ const { camelizeKeys, decamelizeKeys } = require('humps');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
+const authorize = function(req, res, next) {
+  jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, playload) => {
+    if (err) {
+      return next(boom.create(401, 'Unauthorized'));
+    }
+
+    req.claim = playload;
+
+    next();
+  });
+};
+
+router.get('/users/firstName', authorize, (req, res, next) => {
+  const userId = req.claim.userId;
+  knex('users')
+    .where('id', userId)
+    .then((user) => {
+      return user[0].first_name
+    })
+    .then((firstName) => {
+
+      res.setHeader('Content-Type', 'application/json')
+
+      res.send({firstName: firstName});
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get('/users', (req, res, next) => {
   knex('users')
     .then((result) => {
@@ -35,7 +65,17 @@ router.get('/users/:id', (req, res, next) => {
 });
 
 router.post('/users', (req, res, next) => {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
+
+  console.log(req.body);
+
+  if (!firstName || !firstName.trim()) {
+    return next(boom.create(400, 'First name must not be blank'));
+  }
+
+  if (!lastName || !lastName.trim()) {
+    return next(boom.create(400, 'Last name must not be blank'));
+  }
 
   if (!email || !email.trim()) {
     return next(boom.create(400, 'Email must not be blank'));
@@ -66,7 +106,7 @@ router.post('/users', (req, res, next) => {
     })
     .then((rows) => {
       const user = camelizeKeys(rows[0]);
-      const claim = { userId: user.id };
+      const claim = { userId: user.id};
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days'
       });
