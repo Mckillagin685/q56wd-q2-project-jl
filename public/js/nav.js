@@ -2,8 +2,8 @@
   'use strict';
 
 $(document).ready(function(){
-    $('.modal').modal();
-    $('.collapsible').collapsible();
+  $('.modal').modal();
+  $('.collapsible').collapsible();
 });
 
   $.getJSON('/token')
@@ -14,29 +14,30 @@ $(document).ready(function(){
       if (loggedIn) {
         $.getJSON('/users/firstName')
           .done((firstName) => {
-            console.log(firstName.firstName)
-            const $helloUser = $('<a>').text('Hello, ' + firstName.firstName);
-            const $logout = $('<a>').text('Log out');
 
-            $logout.click((event) => {
-              event.preventDefault();
+          const $helloUser = $('<a>').text('Hello, ' + firstName.firstName);
+          const $logout = $('<a>').text('Log out');
 
-              const options = {
-                dataType: 'json',
-                type: 'DELETE',
-                url: '/token'
-              };
+          $logout.click((event) => {
+            event.preventDefault();
 
-              $.ajax(options)
-                .done(() => {
-                  window.location.href = 'index.html';
-                })
-                .fail(() => {
-                  Materialize.toast('Unable to log out. Please try again.', 3000);
-                });
-            });
-            $greet.append($helloUser)
-            $log.append($logout);
+            const options = {
+              dataType: 'json',
+              type: 'DELETE',
+              url: '/token'
+            };
+
+            $.ajax(options)
+              .done(() => {
+                window.location.href = '/index.html';
+              })
+              .fail(() => {
+                Materialize.toast('Unable to log out. Please try again.', 3000);
+              });
+          });
+
+          $greet.append($helloUser)
+          $log.append($logout);
         })
         .fail(($xhr) => {
           Materialize.toast($xhr.responseText, 3000);
@@ -61,7 +62,6 @@ $(document).ready(function(){
 
     $('#signUpForm').submit((event) => {
       event.preventDefault();
-      // console.log('submit has been triggered');
 
       const firstName = $('#firstName').val().trim();
       const lastName = $('#lastName').val().trim();
@@ -110,7 +110,6 @@ $(document).ready(function(){
 
     $('#loginForm').submit((event) => {
       event.preventDefault();
-      // console.log('submit has been triggered');
 
       const email = $('#email').val().trim();
       const password = $('#password').val();
