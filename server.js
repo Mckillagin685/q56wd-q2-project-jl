@@ -32,19 +32,21 @@ const path = require('path');
 
 app.use(express.static(path.join('public')));
 
-app.use((req, res, next) => {
-  if (/json/.test(req.get('Accept'))) {
-    return next();
-  }
-
-  res.sendStatus(406);
-});
+// app.use((req, res, next) => {
+//   if (/json/.test(req.get('Accept'))) {
+//     return next();
+//   }
+//
+//   res.sendStatus(406);
+// });
 
 const token = require('./routes/token');
 const users = require('./routes/users');
+const glassdoor = require('./routes/glassdoor');
 
 app.use(token);
 app.use(users);
+app.use(glassdoor);
 
 app.use((_req, res) => {
   res.sendStatus(404);

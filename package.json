@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Mckillagin685/q56wd-q2-project-jl#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.15.2",
     "boom": "^3.2.2",
