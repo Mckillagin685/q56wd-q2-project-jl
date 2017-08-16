@@ -401,8 +401,54 @@ const renderJobs = function() {
           console.log('company: ' + company.name);
 
           // jobs = newJobs;
-          // renderJobs();
+          renderCompany(company);
           // $('.progress').css('visibility', 'hidden');
+
+          const renderCompany = function(company) {
+
+            const glassDoor = $('#glassDoor')
+            const $table = $('<table>')
+            const $tbody = $('<tbody>')
+            const $tr = $('<tr>')
+
+            const $tdN = $('<td>').text(company[0].name)
+            $tr.append($tdN)
+            const $tdL = $('<td>').text(company[0].squareLogo)
+            $tr.append($tdL)
+            const $tdW = $('<td>').text(company[0].website)
+            $tr.append($tdW)
+            $tbody.append($tr)
+
+            const $tdI = $('<td>').text('Industry: ' + company[0].industry)
+            $tr.append($tdI)
+            const $tdS = $('<td>').text('Sector: ' + company[0].sectorName)
+            $tr.append($tdS)
+            const $tdNOR = $('<td>').text('Number of Ratings: ' + company[0].numberOfRatings)
+            $tr.append($tdNOR)
+            $tbody.append($tr)
+
+            const $tdOR = $('<td>').text('Overall Rating: ' + company[0].overallRating)
+            $tr.append($tdOR)
+            const $tdRD = $('<td>').text('Rating Description: ' + company[0].ratingDescription)
+            $tr.append($tdRD)
+            const $tdRTF = $('<td>').text('Recommend to Friend Rating: ' + company[0].recommendToFriendRating)
+            $tr.append($tdRTF)
+            $tbody.append($tr)
+
+            const $tdWLC = $('<td>').text('Work Life Balance Rating: ' + company[0].workLifeBalanceRating)
+            $tr.append($tdWLC)
+            const $tdCAVR = $('<td>').text('Culture and Values Rating: ' + company[0].cultureAndValuesRating)
+            $tr.append($tdS)
+            const $tdCABR = $('<td>').text('Compensation and Benefits Rating: ' + company[0].compensationAndBenefitsRating)
+            $tr.append($tdCABR)
+            $tbody.append($tr)
+
+            const $tdSLR = $('<td>').text('Senior Leadership Rating: ' + company[0].seniorLeadershipRating)
+            $tr.append($tdSLR)
+            const $tdCOR = $('<td>').text('Career Opportunities Rating: ' + company[0].careerOpportunitiesRating)
+            $tr.append($tdCOR)
+            $tbody.append($tr)
+          }
 
         })
 
