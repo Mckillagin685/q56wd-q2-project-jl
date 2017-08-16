@@ -71,8 +71,6 @@ const renderJobs = function() {
 
   for (let job of jobs) {
 
-    console.log(job.url);
-
     let $jobTitle = $('<button>').text(job.title).attr({id: job.url, class: 'getJob'})
     let $td = $('<td>')
     let $jobCompany = $('<td>').text(job.company)
@@ -98,7 +96,6 @@ const renderJobs = function() {
 
     $('#job').slideUp('slow')
 
-    console.log(event.target.id);
     const jobUrl = event.target.id
     let jobTitle = ''
     let jobCompany = ''
@@ -207,18 +204,25 @@ const renderJobs = function() {
             const $tr9 = $('<tr>')
             const $tr10 = $('<tr>')
 
-            const $tdN = $('<td>').text(company.name)
+            const $aN = $('<a>').text(company.name).attr('href', company.featuredReview.attributionURL)
+            console.log(company);
+            console.log(company.featuredReview.attributionURL);
+            const $tdN = $('<td>')
+            $tdN.append($aN)
             $tr1.append($tdN)
             const $img = $('<img>').attr({
               src: company.squareLogo,
               height: "42",
               width: "42"
               })
-
+              // console.log(company);
             const $tdL = $('<td>')
             $tdL.append($img)
             $tr1.append($tdL)
-            const $tdW = $('<td>').text(company.website)
+            console.log(company.website);
+            const $aW = $('<a>').text(company.website).attr('href', ('http://' + company.website))
+            const $tdW = $('<td>')
+            $tdW.append($aW)
             $tr1.append($tdW)
             $tbody.append($tr1)
 
@@ -230,11 +234,20 @@ const renderJobs = function() {
             $tr2.append($tdNOR)
             $tbody.append($tr2)
 
+            $table.append($tbody)
+            glassDoor.append($table)
+
+            // fis first greenDoor Table
+
             const $divGDR = $('<div>').attr({id: 'greenDoorRatings', class: 'col s6'})
-            const $tableGDR = $('<table>').attr('id', 'tableGDR')
+            const $tableGDR = $('<table>').attr('class', 'striped')
+            const $tableGDRHeader = $('<th>').text('Glassdoor Ratings')
+            const $tableGDRBody = $('<tbody>').attr('id', 'tableGDR')
+            $tableGDR.append($tableGDRHeader)
+            $tableGDR.append($tableGDRBody)
             $divGDR.append($tableGDR)
             const $divFUR = $('<div>').attr({id: 'featuredUserReview', class: 'col s6'})
-            const $tableFUR = $('<table>').attr('id', 'tableFUR')
+            const $tableFUR = $('<table>').attr('id', 'tableFUR').attr('class', 'striped')
             $divFUR.append($tableFUR)
 
             glassDoor.append($divGDR)
@@ -243,133 +256,59 @@ const renderJobs = function() {
             // *****************************************************************
             const greenDoorKeys = [
               "Rating Description:",
-              // "ratingDescription",
               "Overall Rating:",
-              // "overallRating",
               "Recommend to Friend Rating:",
-              // "recommendToFriendRating",
               "Work Life Balance Rating:",
-              // "workLifeBalanceRating",
               "Work Life Balance Rating:",
-              // "workLifeBalanceRating",
               "Culture and Values Rating:",
-              // "cultureAndValuesRating",
               "Compensation and Benefits Rating:",
-              // "compensationAndBenefitsRating",
               "Career Opportunities Rating:",
-              // "careerOpportunitiesRating",
               "Senior Leadership Rating:",
-              // "seniorLeadershipRating"
             ]
 
             const greenDoorVals = [
-              // "Rating Description:",
               "ratingDescription",
-              // "Overall Rating:",
               "overallRating",
-              // "Recommend to Friend Rating:",
               "recommendToFriendRating",
-              // "Work Life Balance Rating:",
               "workLifeBalanceRating",
-              // "Work Life Balance Rating:",
               "workLifeBalanceRating",
-              // "Culture and Values Rating:",
               "cultureAndValuesRating",
-              // "Compensation and Benefits Rating:",
               "compensationAndBenefitsRating",
-              // "Career Opportunities Rating:",
               "careerOpportunitiesRating",
-              // "Senior Leadership Rating:",
               "seniorLeadershipRating"
             ]
 
-            // console.log(greenDoorRatings);
-            // console.log(1%2 != 0);
-            // console.log(2%2 != 0);
-            let $td = $('<tr>')
-            let $row = $('<tr>')
-            let tableGDR = $('#tableGDR')
+            // let tableGDR = $('#tableGDR')
             for (let i=0 ; i<greenDoorKeys.length ; i++) {
               const $row = $('<tr>')
               $row.append($('<td>').text(greenDoorKeys[i]))
               $row.append($('<td>').text(company[greenDoorVals[i]]))
-              tableGDR.append($row)
+              $tableGDRBody.append($row)
             }
 
             // *****************************************************************
 
-            // const $tdRD = $('<td>').text('Rating Description: ' + company.ratingDescription)
-            // $tr6.append($tdRD)
-            // $tr6.append($tr)
-            // $tr6.append($tr)
-            // $tbody.append($tr6)
+            // const companyReview = company.featuredReview
+            // const $divReview = $('<div>').attr('id', 'companyReview')
             //
-            // const $tdOR = $('<td>').text('Overall Rating: ' + company.overallRating)
-            // $tr3.append($tdOR)
-            // $tr3.append($tr)
-            // $tr3.append($tr)
-            // $tbody.append($tr3)
+            // const $title = $('<div>').text("Title: " + companyReview.headline).attr('class', 'row')
+            // $divReview.append($title)
+            // const $rating = $('<p>').text('Overall Rating: ' + companyReview.overall).attr('class', 'row')
+            // $divReview.append($rating)
+            // const $date = $('<p>').text('Review Date: ' + companyReview.reviewDateTime).attr('class', 'row')
+            // $divReview.append($date)
+            // const $job = $('<p>').text('Reviewd By: ' + companyReview.jobTitle).attr('class', 'row')
+            // $divReview.append($job)
+            // const $location = $('<p>').text('Location: ' + companyReview.location).attr('class', 'row')
+            // $divReview.append($location)
+            // const $current = $('<p>').text('Currently Employed at this company: ' + companyReview.currentJob).attr('class', 'row')
+            // $divReview.append($current)
+            // const $pro = $('<div>').text("Pro's: " + companyReview.pros).attr('class', 'row')
+            // $divReview.append($pro)
+            // const $con = $('<div>').text("Con's: " + companyReview.cons).attr('class', 'row')
+            // $divReview.append($con)
             //
-            // const $tdRTF = $('<td>').text('Recommend to Friend Rating: ' + company.recommendToFriendRating)
-            // $tr7.append($tdRTF)
-            // $tr7.append($tr)
-            // $tr7.append($tr)
-            // $tbody.append($tr7)
-            //
-            // const $tdWLC = $('<td>').text('Work Life Balance Rating: ' + company.workLifeBalanceRating)
-            // $tr4.append($tdWLC)
-            // $tr4.append($tr)
-            // $tr4.append($tr)
-            // $tbody.append($tr4)
-            //
-            // const $tdCAVR = $('<td>').text('Culture and Values Rating: ' + company.cultureAndValuesRating)
-            // $tr8.append($tdCAVR)
-            // $tr8.append($tr)
-            // $tr8.append($tr)
-            // $tbody.append($tr8)
-            //
-            // const $tdCABR = $('<td>').text('Compensation and Benefits Rating: ' + company.compensationAndBenefitsRating)
-            // $tr9.append($tdCABR)
-            // $tr9.append($tr)
-            // $tr9.append($tr)
-            // $tbody.append($tr9)
-            //
-            // const $tdCOR = $('<td>').text('Career Opportunities Rating: ' + company.careerOpportunitiesRating)
-            // $tr10.append($tdCOR)
-            // $tr10.append($tr)
-            // $tr10.append($tr)
-            // $tbody.append($tr10)
-            //
-            // const $tdSLR = $('<td>').text('Senior Leadership Rating: ' + company.seniorLeadershipRating)
-            // $tr5.append($tdSLR)
-            // $tr5.append($tr)
-            // $tr5.append($tr)
-            // $tbody.append($tr5)
-            //
-            // $table.append($tbody)
-            // glassDoor.append($table)
-
-            const companyReview = company.featuredReview
-            const $divReview = $('<div>').attr('id', 'companyReview')
-
-            const $title = $('<div>').text("Title: " + companyReview.headline).attr('class', 'row')
-            $divReview.append($title)
-            const $rating = $('<p>').text('Overall Rating: ' + companyReview.overall).attr('class', 'row')
-            $divReview.append($rating)
-            const $date = $('<p>').text('Review Date: ' + companyReview.reviewDateTime).attr('class', 'row')
-            $divReview.append($date)
-            const $job = $('<p>').text('Reviewd By: ' + companyReview.jobTitle).attr('class', 'row')
-            $divReview.append($job)
-            const $location = $('<p>').text('Location: ' + companyReview.location).attr('class', 'row')
-            $divReview.append($location)
-            const $current = $('<p>').text('Currently Employed at this company: ' + companyReview.currentJob).attr('class', 'row')
-            $divReview.append($current)
-            const $pro = $('<div>').text("Pro's: " + companyReview.pros).attr('class', 'row')
-            $divReview.append($pro)
-            const $con = $('<div>').text("Con's: " + companyReview.cons).attr('class', 'row')
-            $divReview.append($con)
-
-            glassDoor.append($divReview)
+            // glassDoor.append($divReview)
           }
           renderCompany(company);
           $('#glassDoor').slideDown('slow')
