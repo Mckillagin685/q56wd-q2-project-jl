@@ -187,7 +187,7 @@ const renderJobs = function() {
     $divJobFooter.append($backButton)
     $divJobFooter.append($favoriteButton)
     jobsTable.append($divJobFooter)
-    jobsTable.append($divGlassDoor)
+    // jobsTable.append($divGlassDoor)
 
     $('#job').slideDown('slow')
 
@@ -196,6 +196,7 @@ const renderJobs = function() {
 
       $('#job').slideUp('slow')
       $('#jobs').slideDown('slow')
+      $('#glassDoor').slideUp('slow')
     })
 
     $("#getJobCompany").click(function(event) {
@@ -268,7 +269,7 @@ const renderJobs = function() {
             glassDoor.append($divFUR)
 
             // *****************************************************************
-            const greenDoorRatings = [
+            const greenDoorKeys = [
               "Rating Description:",
               // "ratingDescription",
               "Overall Rating:",
@@ -289,7 +290,7 @@ const renderJobs = function() {
               // "seniorLeadershipRating"
             ]
 
-            const greenDoorRatings = [
+            const greenDoorVals = [
               // "Rating Description:",
               "ratingDescription",
               // "Overall Rating:",
@@ -316,16 +317,11 @@ const renderJobs = function() {
             let $td = $('<tr>')
             let $row = $('<tr>')
             let tableGDR = $('#tableGDR')
-            for (i=1 ; i<greenDoorRatings.length+1 ; i++) {
-              if (i%2 === 0) {
-                console.log(company.(greenDoorRatings[i]));
-                // $row.append($('<td>').text(company.(greenDoorRatings[i]))
-                // tableGDR.append($row)
-                $row=''
-              } else {
-                console.log(greenDoorRatings[i]);
-                // $row.append($('<td>').text(greenDoorRatings[i]))
-              }
+            for (let i=0 ; i<greenDoorKeys.length ; i++) {
+              const $row = $('<tr>')
+              $row.append($('<td>').text(greenDoorKeys[i]))
+              $row.append($('<td>').text(company[greenDoorVals[i]]))
+              tableGDR.append($row)
             }
 
             // *****************************************************************
