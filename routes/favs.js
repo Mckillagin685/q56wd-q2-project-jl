@@ -23,7 +23,7 @@ const authorize = function(req, res, next) {
 
 module.exports = router;
 
-router.post('/favs/addJobInfo/:url', (req, res, next) => {
+router.post('/favs/addJobInfo/:url', authorize, (req, res, next) => {
   const url = req.param.url;
   let result = {};
   request(`${url}`, (err, res, body) => {
@@ -37,7 +37,7 @@ router.post('/favs/addJobInfo/:url', (req, res, next) => {
       var jobTerms = $('#taxTermsTextId').attr('value')
       var postDate = $('li.posted').text()
 
-      result = {'location': location, 'employer': employer, 'job_title': jobTitle, 'job_description': jobDesc, 'job_skills': jobSkills, 'job_terms': jobTerms, 'post_age': postDate, 'url': url, userId: req.claim.userId}
+      result = {'location': location, 'employer': employer, 'job_title': jobTitle, 'job_description': jobDesc, 'job_skills': jobSkills, 'job_terms': jobTerms, 'post_age': postDate, 'job_url': url, userId: req.claim.userId }
 
       return knex('favs').insert(result, '*');
     }else if(err){
@@ -47,111 +47,51 @@ router.post('/favs/addJobInfo/:url', (req, res, next) => {
   res.send(result);
 });
 
+router.get('/favs/jobs', authorize, (req, res, next) => {
+  knex('favs')
+    .where('favs.user_id', req.claim.userId)
+    .orderBy('favs.post_age', 'ASC')
+    .then((rows) => {
+      const favs = camelizeKeys(rows);
 
-//
-// router.get('/favorites', authorize, (req, res, next) => {
-//   knex('favorites')
-//     .innerJoin('books', 'books.id', 'favorites.book_id')
-//     .where('favorites.user_id', req.claim.userId)
-//     .orderBy('books.title', 'ASC')
-//     .then((rows) => {
-//       const favs = camelizeKeys(rows);
-//
-//       res.send(favs);
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
-//
-// router.get('/favorites/check', authorize, (req, res, next) => {
-//   const bookId = Number.parseInt(req.query.bookId);
-//
-//   if (!Number.isInteger(bookId)) {
-//     return next(boom.create(400, 'Book ID must be an integer'));
-//   }
-//
-//   knex('books')
-//     .innerJoin('favorites', 'favorites.book_id', 'books.id')
-//     .where({
-//       'favorites.book_id': bookId,
-//       'favorites.user_id': req.claim.userId
-//     })
-//     .first()
-//     .then((row) => {
-//       if (row) {
-//         return res.send(true);
-//       }
-//
-//       res.send(false);
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-// });
-//
-// router.post('/favorites', authorize, (req, res, next) => {
-//   const bookId = Number.parseInt(req.body.bookId);
-//
-//   if (!Number.isInteger(bookId)) {
-//     return next(boom.create(400, 'Book ID must be an integer'));
-//   }
-//
-  // knex('books')
-  //   .where('id', bookId)
-  //   .first()
-  //   .then((book) => {
-  //     if (!book) {
-  //       throw boom.create(404, 'Book not found');
-  //     }
-  //
-  //     const insertFavorite = { bookId, userId: req.claim.userId };
-  //
-  //     return knex('favorites')
-  //       .insert(decamelizeKeys(insertFavorite), '*');
-  //   })
-  //   .then((rows) => {
-  //     const favorite = camelizeKeys(rows[0]);
-  //
-  //     res.send(favorite);
-  //   })
-  //   .catch((err) => {
-  //     next(err);
-  //   });
-// });
-//
-// router.delete('/favorites', authorize, (req, res, next) => {
-//   const bookId = Number.parseInt(req.body.bookId);
-//
-//   if (!Number.isInteger(bookId)) {
-//     return next(boom.create(400, 'Book ID must be an integer'));
-//   }
-//
-//   // eslint-disable-next-line camelcase
-//   const clause = { book_id: bookId, user_id: req.claim.userId };
-//
-//   let favorite;
-//
-//   knex('favorites')
-//     .where(clause)
-//     .first()
-//     .then((row) => {
-//       if (!row) {
-//         throw boom.create(404, 'Favorite not found');
-//       }
-//
-//       favorite = camelizeKeys(row);
-//
-//       return knex('favorites')
-//         .del()
-//         .where('id', favorite.id);
-//     })
-//     .then(() => {
-//       delete favorite.id;
-//
-//       res.send(favorite);
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
+      res.send(favs);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.delete('/favs/:id', authorize, (req, res, next) => {
+  const favId = Number.parseInt(req.body.bookId);
+
+  if (!Number.isInteger(favId)) {
+    return next(boom.create(400, 'Favorite ID must be an integer'));
+  }
+
+  const clause = { id: favId, user_id: req.claim.userId };
+
+  let fav;
+
+  knex('favs')
+    .where(clause)
+    .first()
+    .then((row) => {
+      if (!row) {
+        throw boom.create(404, 'Favorite not found');
+      }
+
+      fav = camelizeKeys(row);
+
+      return knex('favs')
+        .del()
+        .where('id', fav.id);
+    })
+    .then(() => {
+      delete fav.id;
+
+      res.send(fav);
+    })
+    .catch((err) => {
+      next(err);
+    });
 });

@@ -29,7 +29,7 @@ $(document).ready(function(){
 
             $.ajax(options)
               .done(() => {
-                window.location.href = '/index.html';
+                window.location.href = '/jobs.html';
               })
               .fail(() => {
                 Materialize.toast('Unable to log out. Please try again.', 3000);
@@ -101,7 +101,7 @@ $(document).ready(function(){
 
       $.ajax(options)
         .done((user) => {
-          window.location.href = '/search.html';
+          window.location.href = '/jobs.html';
         })
         .fail(($xhr) => {
           Materialize.toast($xhr.responseText, 3000);
@@ -132,7 +132,7 @@ $(document).ready(function(){
 
       $.ajax(options)
         .done((user) => {
-          window.location.href = '/search.html';
+          window.location.href = '/jobs.html';
         })
         .fail(($xhr) => {
           Materialize.toast($xhr.responseText, 3000);

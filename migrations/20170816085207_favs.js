@@ -11,7 +11,8 @@ exports.up = function(knex) {
     table.string('job_description').notNullable().defaultTo('');
     table.string('job_skills').notNullable().defaultTo('');
     table.string('job_terms').notNullable().defaultTo('');
-    table.string('url').notNullable().defaultTo('');
+    table.string('job_url').notNullable().defaultTo('');
+    table.string('user_id').notNullable().defaultTo('');
     table.timestamps(true, true);
   });
 };
