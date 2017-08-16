@@ -373,6 +373,8 @@ const renderJobs = function() {
 
           const company = GDComp[0];
 
+          const glassDoorId = company[0].id
+
           // const newGreenDoor = {
           //   careerOpportunitiesRating: company[0].careerOpportunitiesRating,
           //   // ceo:{name: "Harold M. Messmer, Jr", title: "Chairman and CEO", numberOfRatings: 141, pctApprove: 72, pctDisapprove: 28, …}
