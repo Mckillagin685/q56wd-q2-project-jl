@@ -1,12 +1,7 @@
 'use strict';
 
-<<<<<<< HEAD
 $('#glassDoor').hide()
 
-// ***********************************************MAIN PAGE
-
-=======
->>>>>>> d019ce031a51de8a3177c8ed7e819bef115b1286
 let searchString = '';
 let jobs = []
 let jobList = []
@@ -86,16 +81,10 @@ const renderJobs = function() {
   $table.append($tbody)
   jobsTable.append($table)
 
-<<<<<<< HEAD
-  let job = {}
-  for (job of jobs) {
-    let $jobTitle = $('<button>').text(job.title).attr('id', job.url)
-=======
   for (let job of jobs) {
     // console.log(job);
     console.log(job.url);
     let $jobTitle = $('<button>').text(job.title).attr({id: job.url, class: 'getJob'})
->>>>>>> d019ce031a51de8a3177c8ed7e819bef115b1286
     let $td = $('<td>')
     let $jobCompany = $('<td>').text(job.company)
     let $jobLocation = $('<td>').text(job.location)
@@ -125,14 +114,8 @@ const renderJobs = function() {
     let jobTitle = ''
     let jobCompany = ''
     let jobLocation = ''
-<<<<<<< HEAD
-=======
     let jobDate = ''
 
-
-
-    // console.log(jobs.length);
->>>>>>> d019ce031a51de8a3177c8ed7e819bef115b1286
 
     for (let i = 0; i < jobs.length; i++) {
 
