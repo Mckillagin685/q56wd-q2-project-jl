@@ -9,7 +9,7 @@ const getJobs = function(name) {
 
   $('.progress').css('visibility', 'visible');
 
-  var $xhr = $.getJSON(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`);
+  var $xhr = $.getJSON(`https://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`);
   $xhr.done(function(data) {
     if ($xhr.status !== 200) {
       return;
