@@ -1,159 +1,5 @@
 'use strict';
 
-// $('.parallax').parallax();
-// console.log('1');
-
-$(".logout").hide();
-$('#glassDoor').hide()
-
-$.getJSON('/user')
-  .done((user) => {
-    const $helloUser = $('.helloUser');
-    const firstName = ('hello ' + user[0].first_name);
-    // console.log('user: ', user);
-    // console.log('firstName: ',firstName);
-    if (user) {
-      console.log(firstName);
-      $helloUser.text(firstName).append;
-      $(".login").hide();
-      $(".logout").show();
-    } else {
-      $(".login").show();
-      $(".logout").hide();
-    }
-  })
-
-const $logout = $('.logout');
-
-$logout.click((event) => {
-  event.preventDefault();
-
-  const options = {
-    dataType: 'json',
-    type: 'DELETE',
-    url: '/token'
-  };
-
-  $.ajax(options)
-    .done(() => {
-      // console.log('I am Loged Out and I need to refresh this page');
-      // window.location.href = '/index.html';
-    })
-    .fail(() => {
-      // Materialize.toast('Unable to log out. Please try again.', 3000);
-      window.location.href = '/index.html';
-    });
-});
-
-// function() {
-'use strict';
-// console.log($('#loginForm'));
-$('#loginForm').submit((event) => {
-  event.preventDefault();
-  // console.log('submit has been triggered');
-
-  const email = $('#email').val().trim();
-  const password = $('#password').val();
-
-  if (!email) {
-    return Materialize.toast('Email must not be blank', 3000);
-  }
-
-  if (!password) {
-    return Materialize.toast('Password must not be blank', 3000);
-  }
-
-  const options = {
-    contentType: 'application/json',
-    data: JSON.stringify({
-      email,
-      password
-    }),
-    dataType: 'json',
-    type: 'POST',
-    url: '/token'
-  };
-
-  $.ajax(options)
-    .done((user) => {
-      // console.log(user.firstName);
-      let helloUser = ('hello ' + user.firstName);
-      $(".helloUser").text(helloUser);
-      window.location.href = '/search.html';
-    })
-    .fail(($xhr) => {
-      Materialize.toast($xhr.responseText, 3000);
-    });
-});
-
-$('#signUpForm').submit((event) => {
-  event.preventDefault();
-  // console.log('submit has been triggered');
-
-  const firstName = $('#firstName').val().trim();
-  const lastName = $('#lastName').val().trim();
-  const email = $('#emailSU').val().trim();
-  const password = $('#passwordSU').val();
-
-  if (!firstName) {
-    return Materialize.toast('First name must not be blank', 3000);
-  }
-
-  if (!lastName) {
-    return Materialize.toast('Last name must not be blank', 3000);
-  }
-
-  if (!email) {
-    return Materialize.toast('Email must not be blank', 3000);
-  }
-
-  if (email.indexOf('@') < 0) {
-    return Materialize.toast('Email must be valid', 3000);
-  }
-
-  if (!password || password.length < 8) {
-    return Materialize.toast(
-      'Password must be at least 8 characters long',
-      3000
-    );
-  }
-
-  const options = {
-    contentType: 'application/json',
-    data: JSON.stringify({
-      firstName,
-      lastName,
-      email,
-      password
-    }),
-    dataType: 'json',
-    type: 'POST',
-    url: '/users'
-  };
-
-  $.ajax(options)
-    .done(() => {
-      window.location.href = '/search.html';
-    })
-    .fail(($xhr) => {
-      Materialize.toast($xhr.responseText, 3000);
-    });
-});
-
-$(document).ready(function() {
-  // console.log($('.modal'));
-  // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-  $('.modal').modal();
-});
-
-// $(document).ready(function(){
-$('.collapsible').collapsible();
-// });
-
-// console.log('2');
-
-// ***********************************************MAIN PAGE
-
 let searchString = '';
 let jobs = []
 let jobList = []
@@ -161,7 +7,7 @@ const getJobs = function(name) {
 
   $('.progress').css('visibility', 'visible');
 
-  var $xhr = $.getJSON(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`); //text=java&city=New+York,+NY
+  var $xhr = $.getJSON(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`);
   // console.log(searchString);
   $xhr.done(function(data) {
     if ($xhr.status !== 200) {
@@ -194,7 +40,6 @@ const getJobs = function(name) {
     renderJobs();
     $('.progress').css('visibility', 'hidden');
   });
-  // searchVar = [];
   searchString = '';
 };
 // console.log('3');
@@ -204,8 +49,6 @@ $("#getJobs").submit(function(event) {
   // console.log('Submit was clicked');
 
   $("#jobs").empty();
-  // $("#listings").empty();
-  // $("#listings").slideDown("slow");
 
   var title = $('#title').val();
   var location = $('#location').val();
@@ -214,8 +57,6 @@ $("#getJobs").submit(function(event) {
 
   getJobs(name);
 });
-
-// ********************************************CREATE JOB LIST
 
 const renderJobs = function() {
 
@@ -236,9 +77,8 @@ const renderJobs = function() {
   $thead.append($tr)
   $table.append($thead)
   $table.append($tbody)
-  jobsTable.append($table)   //.attr('class', 'getJob')
+  jobsTable.append($table)
 
-  // let job = {}
   for (let job of jobs) {
     // console.log(job);
     console.log(job.url);
@@ -360,7 +200,7 @@ const renderJobs = function() {
 
     $("#getJobCompany").click(function(event) {
       event.preventDefault();
-      // glassDoor
+
       $("#glassDoor").empty();
 
       $('#glassDoor').slideUp('slow')
@@ -369,49 +209,13 @@ const renderJobs = function() {
 
       const jobCompany = $(event.target).text()
 
-      // alert(jobCompany)
-
       $.getJSON('/glassdoor/' + jobCompany)
         .done((GDComp) => {
           // console.log(company);
 
           const company = GDComp[0];
 
-          console.log(GDComp);
-
-          // const glassDoorId = company.id
-
-          // const newGreenDoor = {
-          //   careerOpportunitiesRating: company[0].careerOpportunitiesRating,
-          //   // ceo:{name: "Harold M. Messmer, Jr", title: "Chairman and CEO", numberOfRatings: 141, pctApprove: 72, pctDisapprove: 28, …}
-          //   compensationAndBenefitsRating: company[0].compensationAndBenefitsRating,
-          //   cultureAndValuesRating: company[0].cultureAndValuesRating,
-          //   // exactMatch:true
-          //   // featuredReview:{attributionURL: "http://www.glassdoor.com/Reviews/Employee-Review-Robert-Half-Technology-RVW16354980.htm", id: 16354980, currentJob: false, reviewDateTime: "2017-08-14 14:07:14.01", jobTitle: "Employee", …}
-          //   id: company[0].id,
-          //   industry: company[0].industry,
-          //   // industryId:200032
-          //   // industryName:"Staffing & Outsourcing"
-          //   // isEEP:true
-          //   name: company[0].name,
-          //   numberOfRatings: company[0].numberOfRatings,
-          //   overallRating: company[0].overallRating,
-          //   ratingDescription: company[0].ratingDescription,
-          //   recommendToFriendRating: company[0].recommendToFriendRating,
-          //   // sectorId:10006
-          //   sectorName: company[0].sectorName,
-          //   seniorLeadershipRating: company[0].seniorLeadershipRating,
-          //   squareLogo: company[0].squareLogo,
-          //   website: company[0].website,
-          //   workLifeBalanceRating: company[0].workLifeBalanceRating
-          // };
-
           // console.log(GDComp);
-          // console.log('company: ' + company.name);
-
-          // jobs = newJobs;
-
-          // $('.progress').css('visibility', 'hidden');
 
           const renderCompany = function(company) {
               // console.log(company);
@@ -437,7 +241,7 @@ const renderJobs = function() {
               height: "42",
               width: "42"
               })
-            // <img src="smiley.gif" alt="Smiley face" height="42" width="42">
+
             const $tdL = $('<td>')
             $tdL.append($img)
             $tr1.append($tdL)
@@ -525,17 +329,10 @@ const renderJobs = function() {
             $divReview.append($con)
 
             glassDoor.append($divReview)
-
           }
-
           renderCompany(company);
           $('#glassDoor').slideDown('slow')
-
-
         })
-
     })
-
   })
-
 }
