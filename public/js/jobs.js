@@ -17,7 +17,7 @@ const getJobs = function(name) {
     // console.log(data);
 
     jobList = data.resultItemList;
-    console.log(jobList);
+    // console.log(jobList);
 
     // console.log(jobList);
 
@@ -81,7 +81,7 @@ const renderJobs = function() {
 
   for (let job of jobs) {
     // console.log(job);
-    console.log(job.url);
+    // console.log(job.url);
     let $jobTitle = $('<button>').text(job.title).attr({id: job.url, class: 'getJob'})
     let $td = $('<td>')
     let $jobCompany = $('<td>').text(job.company)
