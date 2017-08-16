@@ -24,17 +24,3 @@ router.get('/glassdoor/:company', (req, res, next) => {
 
 
 module.exports = router;
-
-
-// http://api.glassdoor.com/api/api.htm?
-// t.p=182724&t.k=dnxzk0MPf7A
-//
-// &userip=0.0.0.0
-//
-// &useragent=
-//
-// &format=json
-// &v=1
-// &action=employers
-//
-// &q=
