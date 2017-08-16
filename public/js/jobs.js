@@ -161,7 +161,7 @@ const getJobs = function(name) {
 
   $('.progress').css('visibility', 'visible');
 
-  var $xhr = $.getJSON(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?${searchString}`); //text=java&city=New+York,+NY
+  var $xhr = $.getJSON(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`); //text=java&city=New+York,+NY
   // console.log(searchString);
   $xhr.done(function(data) {
     if ($xhr.status !== 200) {
@@ -171,6 +171,7 @@ const getJobs = function(name) {
     // console.log(data);
 
     jobList = data.resultItemList;
+    console.log(jobList);
 
     // console.log(jobList);
 
@@ -235,13 +236,13 @@ const renderJobs = function() {
   $thead.append($tr)
   $table.append($thead)
   $table.append($tbody)
-  jobsTable.append($table).attr('class', 'getJob')
+  jobsTable.append($table)   //.attr('class', 'getJob')
 
-  let job = {}
-  for (job of jobs) {
+  // let job = {}
+  for (let job of jobs) {
     // console.log(job);
-    // console.log(job.title);
-    let $jobTitle = $('<button>').text(job.title).attr('id', job.url)
+    console.log(job.url);
+    let $jobTitle = $('<button>').text(job.title).attr({id: job.url, class: 'getJob'})
     let $td = $('<td>')
     let $jobCompany = $('<td>').text(job.company)
     let $jobLocation = $('<td>').text(job.location)
@@ -271,12 +272,15 @@ const renderJobs = function() {
 
     $('#job').slideUp('slow')
 
+    console.log(event.target.id);
     const jobUrl = event.target.id
     // console.log(jobUrl);
     let jobTitle = ''
     let jobCompany = ''
     let jobLocation = ''
     let jobDate = ''
+
+
 
     // console.log(jobs.length);
 
@@ -316,7 +320,7 @@ const renderJobs = function() {
     // console.log(jobTitle);
 
     let $jobTitle = $('<a>').text(jobTitle).attr({
-      href: job.url,
+      href: jobUrl,
       target: '_blank'
     })
     let $tdT = $('<td>')
@@ -373,7 +377,9 @@ const renderJobs = function() {
 
           const company = GDComp[0];
 
-          const glassDoorId = company[0].id
+          console.log(GDComp);
+
+          // const glassDoorId = company.id
 
           // const newGreenDoor = {
           //   careerOpportunitiesRating: company[0].careerOpportunitiesRating,
