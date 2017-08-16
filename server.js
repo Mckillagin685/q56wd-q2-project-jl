@@ -12,6 +12,8 @@ app.disable('x-powered-by');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
+// const request = require('request');
+// const cherrio = require('cheerio')
 
 switch (app.get('env')) {
   case 'development':
@@ -25,6 +27,8 @@ switch (app.get('env')) {
   default:
 }
 
+// app.use(request());
+// app.use(cherrio());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
