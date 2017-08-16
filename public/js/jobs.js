@@ -10,23 +10,15 @@ const getJobs = function(name) {
   $('.progress').css('visibility', 'visible');
 
   var $xhr = $.getJSON(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`);
-  // console.log(searchString);
   $xhr.done(function(data) {
     if ($xhr.status !== 200) {
       return;
     }
 
-    // console.log(data);
-
     jobList = data.resultItemList;
-    console.log(jobList);
-
-    // console.log(jobList);
 
     const newJobs = [];
     for (const item of jobList) {
-      // console.log(item);
-      // console.log(item.detailUrl);
       const newItem = {
         url: item.detailUrl,
         title: item.jobTitle,
@@ -34,21 +26,17 @@ const getJobs = function(name) {
         location: item.location,
         date: item.date
       };
-      // console.log(newItem);
       newJobs.push(newItem);
     }
     jobs = newJobs;
-    // console.log('jobs = ' + jobs);
     renderJobs();
     $('.progress').css('visibility', 'hidden');
   });
   searchString = '';
 };
-// console.log('3');
-// console.log($("#getJobs"));
+
 $("#getJobs").submit(function(event) {
   event.preventDefault();
-  // console.log('Submit was clicked');
 
   $("#jobs").empty();
 
@@ -82,7 +70,6 @@ const renderJobs = function() {
   jobsTable.append($table)
 
   for (let job of jobs) {
-    // console.log(job);
     console.log(job.url);
     let $jobTitle = $('<button>').text(job.title).attr({id: job.url, class: 'getJob'})
     let $td = $('<td>')
@@ -194,20 +181,14 @@ const renderJobs = function() {
 
       $('#glassDoor').slideUp('slow')
 
-      // console.log($(event.target).text());
-
       const jobCompany = $(event.target).text()
 
       $.getJSON('/glassdoor/' + jobCompany)
         .done((GDComp) => {
-          // console.log(company);
 
           const company = GDComp[0];
 
-          // console.log(GDComp);
-
           const renderCompany = function(company) {
-              // console.log(company);
             const glassDoor = $('#glassDoor')
             const $table = $('<table>').attr('id', 'glassDoorTable')
             const $tbody = $('<tbody>')
