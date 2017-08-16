@@ -157,7 +157,7 @@ const renderJobs = function() {
 
     const $divJobFooter = $('<div>').attr('id', 'jobFooter')
     const $backButton = $('<button>').text('Back to Summary').attr('id', 'jobBackToJobs')
-    const $favoriteButton = $('<button>').text('Add to Favorites')
+    const $favoriteButton = $('<button>').attr({'data-href': job.url, 'id': 'favoriteButton'}).text('Add to Favorites')
     const $divGlassDoor = $('#glassDoor')
 
     $divJobFooter.append($backButton)
@@ -306,3 +306,25 @@ const renderJobs = function() {
     })
   })
 }
+
+$('html').click((event) => {
+  if(event.target.attributes[0].value === 'favoriteButton'){
+    var url = event.target.parentNode.parentNode.children[0].children[1].children[0].children[0].children[0].attributes[0].value
+
+        const options = {
+          contentType: 'application/json',
+          data: JSON.stringify({'url': url}),
+          dataType: 'json',
+          type: 'POST',
+          url: '/favs/addJobInfo'
+        };
+
+        $.ajax(options)
+          .done(() => {
+            window.location.href = '/jobs.html';
+          })
+          .fail(($xhr) => {
+            Materialize.toast($xhr.responseText, 3000);
+          });
+  }
+})

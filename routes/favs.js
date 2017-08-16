@@ -23,8 +23,8 @@ const authorize = function(req, res, next) {
 
 module.exports = router;
 
-router.post('/favs/addJobInfo/:url', authorize, (req, res, next) => {
-  const url = req.param.url;
+router.post('/favs/addJobInfo', authorize, (req, res, next) => {
+  const url = req.body.url;
   let result = {};
   request(`${url}`, (err, res, body) => {
     if(!err && res.statusCode == 200){
@@ -37,9 +37,15 @@ router.post('/favs/addJobInfo/:url', authorize, (req, res, next) => {
       var jobTerms = $('#taxTermsTextId').attr('value')
       var postDate = $('li.posted').text()
 
-      result = {'location': location, 'employer': employer, 'job_title': jobTitle, 'job_description': jobDesc, 'job_skills': jobSkills, 'job_terms': jobTerms, 'post_age': postDate, 'job_url': url, userId: req.claim.userId }
+      result = {'location': location, 'employer': employer, 'job_title': jobTitle, 'job_description': jobDesc, 'job_skills': jobSkills, 'job_terms': jobTerms, 'post_age': postDate, 'job_url': url, 'user_id': req.claim.userId }
 
-      return knex('favs').insert(result, '*');
+      console.log(result);
+      knex('favs')
+        .insert(result, '*')
+        .catch((err) => {
+          next(err);
+        })
+
     }else if(err){
       throw boom.create(500, 'Internal server error');
     }
@@ -52,9 +58,9 @@ router.get('/favs/jobs', authorize, (req, res, next) => {
     .where('favs.user_id', req.claim.userId)
     .orderBy('favs.post_age', 'ASC')
     .then((rows) => {
-      const favs = camelizeKeys(rows);
-
-      res.send(favs);
+      const userFavs = camelizeKeys(rows);
+      console.log('Here');
+      res.send(decamelizeKeys(userFavs));
     })
     .catch((err) => {
       next(err);
