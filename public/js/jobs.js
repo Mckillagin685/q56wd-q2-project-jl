@@ -408,7 +408,7 @@ const renderJobs = function() {
           const renderCompany = function(company) {
               // console.log(company);
             const glassDoor = $('#glassDoor')
-            const $table = $('<table>') //.attr('class', 'center-align')
+            const $table = $('<table>').attr('id', 'glassDoorTable')
             const $tbody = $('<tbody>')
             const $tr = $('<tr>')
             const $tr1 = $('<tr>')
@@ -499,15 +499,21 @@ const renderJobs = function() {
             const companyReview = company.featuredReview
             const $divReview = $('<div>').attr('id', 'companyReview')
 
-            const $title = $('<div>').text("next Title: " + companyReview.headline).attr('class', 'left')
+            const $title = $('<div>').text("Title: " + companyReview.headline).attr('class', 'row')
             $divReview.append($title)
-            const $subTitle = $('<div>').text(' next Overall Rating: ' + companyReview.overall + ' Review Date: ' + companyReview.reviewDateTime).attr('class', 'left')
-            $divReview.append($subTitle)
-            const $from = $('<p>').text(' next Reviewd By: ' + companyReview.jobTitle + ' Location: ' + companyReview.location + ' Currently Employed at this company: ' + companyReview.currentJob).attr('class', 'left')
-            $divReview.append($from)
-            const $pro = $('<p>').text(" next line Pro's: " + companyReview.pros).attr('class', 'left')
+            const $rating = $('<p>').text('Overall Rating: ' + companyReview.overall).attr('class', 'row')
+            $divReview.append($rating)
+            const $date = $('<p>').text('Review Date: ' + companyReview.reviewDateTime).attr('class', 'row')
+            $divReview.append($date)
+            const $job = $('<p>').text('Reviewd By: ' + companyReview.jobTitle).attr('class', 'row')
+            $divReview.append($job)
+            const $location = $('<p>').text('Location: ' + companyReview.location).attr('class', 'row')
+            $divReview.append($location)
+            const $current = $('<p>').text('Currently Employed at this company: ' + companyReview.currentJob).attr('class', 'row')
+            $divReview.append($current)
+            const $pro = $('<div>').text("Pro's: " + companyReview.pros).attr('class', 'row')
             $divReview.append($pro)
-            const $con = $('<p>').text(" next Con's: " + companyReview.cons).attr('class', 'left')
+            const $con = $('<div>').text("Con's: " + companyReview.cons).attr('class', 'row')
             $divReview.append($con)
 
             glassDoor.append($divReview)
