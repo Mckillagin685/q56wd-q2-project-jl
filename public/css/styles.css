@@ -4,6 +4,10 @@ table {
     margin-right: auto;
 }
 
+.collapsible-header {
+  justify-content: space-between;
+}
+
 #companyReview {
     width: 60%;
     margin-left: auto;

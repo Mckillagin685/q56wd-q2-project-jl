@@ -3,15 +3,14 @@
 
   $.getJSON('/favs/jobs')
     .done((jobs) => {
-      // const $books = $('#books');
+      const $container = $('#favorites');
 
       for (const job of jobs) {
-
-        const $container = $('#favorites');
+         console.log(job);
         const $jobli = $('<li>');
         const $jobHeader = $('<div>').addClass('collapsible-header');
-        const $jobHeaderJob = $('<p>').text(job.job_title);
-        const $jobHeaderAge = $('<p>').addClass('right').text(job.post_age);
+        const $jobHeaderJob = $('<div>').text(job.job_title);
+        const $jobHeaderAge = $('<div>').text(job.post_age);
         const $jobBody = $('<div>').addClass('collapsible-body');
         const $jobCompany = $('<h4>').text('Company: ' + job.employer);
         const $divider1 = $('<div>').addClass('divider');
@@ -40,7 +39,7 @@
         $jobBody.append($del);
         $jobHeader.append($jobHeaderJob);
         $jobHeader.append($jobHeaderAge);
-        $jobli.append($jobHeaderContainer);
+        $jobli.append($jobHeader);
         $jobli.append($jobBody);
         $container.append($jobli);
       }

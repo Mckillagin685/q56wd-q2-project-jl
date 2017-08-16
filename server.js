@@ -12,8 +12,8 @@ app.disable('x-powered-by');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan');
-// const request = require('request');
-// const cherrio = require('cheerio')
+const request = require('request');
+const cherrio = require('cheerio');
 
 switch (app.get('env')) {
   case 'development':
@@ -27,8 +27,8 @@ switch (app.get('env')) {
   default:
 }
 
-// app.use(request());
-// app.use(cherrio());
+
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -44,10 +44,12 @@ app.use(express.static(path.join('public')));
 //   res.sendStatus(406);
 // });
 
+const favs = require('./routes/favs');
 const token = require('./routes/token');
 const users = require('./routes/users');
 const glassdoor = require('./routes/glassdoor');
 
+app.use(favs);
 app.use(token);
 app.use(users);
 app.use(glassdoor);
