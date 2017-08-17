@@ -1,5 +1,10 @@
+#favoriteButton {
+  font-weight: bold;
+  background-color: #b64d52;
+}
+
 .btn {
-  padding: 5px 5px 5px 5px !important;
+  margin: 15px 15px 0 0 !important;
 }
 
 .brand-logo {
@@ -10,7 +15,7 @@
 }
 
 #searchButton {
-  padding: 20px 0 0 30px;
+  padding: 0px 0 0 30px;
 }
 
 #searchHeader {
