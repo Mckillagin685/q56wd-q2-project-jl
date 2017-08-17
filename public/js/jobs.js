@@ -1,5 +1,6 @@
 'use strict';
 
+$('#messagesModal').hide()
 $('#glassDoor').hide()
 
 let searchString = '';
