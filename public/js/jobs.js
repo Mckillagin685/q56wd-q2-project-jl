@@ -9,7 +9,7 @@ const getJobs = function(title, location) {
 
   $('.progress').css('visibility', 'visible');
 
-  console.log(title, location);
+  // console.log(title, location);
 
   const options = {
           contentType: 'application/json',
@@ -52,6 +52,10 @@ $("#getJobs").submit(function(event) {
   var title = $('#title').val();
   var location = $('#location').val();
 
+  if (isNaN(location) || location.length !== 5) {
+    return Materialize.toast('Zip Code must be 5 Digits!', 3000);
+  }
+
   getJobs(title, location);
 });
 
@@ -78,7 +82,7 @@ const renderJobs = function() {
 
   for (let job of jobs) {
 
-    let $jobTitle = $('<button>').text(job.title).attr({id: job.url, class: 'getJob'})
+    let $jobTitle = $('<a>').text(job.title).attr({id: job.url, class: 'getJob waves-effect waves-light btn'})
     let $td = $('<td>')
     let $jobCompany = $('<td>').text(job.company)
     let $jobLocation = $('<td>').text(job.location)
@@ -101,7 +105,7 @@ const renderJobs = function() {
 
     $('#searchForm').slideUp('slow')
 
-    $('#jobs').slideUp('slow')
+    $('#jobs').slideUp('fast')
 
     $('#job').slideUp('slow')
 
@@ -151,7 +155,7 @@ const renderJobs = function() {
     let $aD = $('<a>').text('(click to view on Dice.com)').attr('class', 'black-text')
     let $tdT = $('<td>')
     let $tdC = $('<td>')
-    let $jobCompany = $('<button>').attr('id', 'getJobCompany').text(jobCompany)
+    let $jobCompany = $('<a>').attr('id', 'getJobCompany').text(jobCompany).attr('class', 'waves-effect waves-light btn')
     let $aC = $('<a>').text('(click to view Glassdoor Data)').attr('class', 'black-text')
     let $jobLocation = $('<td>').text(jobLocation)
     let $jobDate = $('<td>').text(jobDate)
@@ -172,8 +176,8 @@ const renderJobs = function() {
     tBody.append($tr)
 
     const $divJobFooter = $('<div>').attr('id', 'jobFooter')
-    const $backButton = $('<button>').text('Back to Summary').attr('id', 'jobBackToJobs')
-    const $favoriteButton = $('<button>').addClass('favoriteButton').attr({'data-href': job.url, 'id': 'favoriteButton'}).text('Add to Favorites')
+    const $backButton = $('<a>').text('Back to Summary').attr('id', 'jobBackToJobs').attr('class', 'waves-effect waves-light btn')
+    const $favoriteButton = $('<a>').addClass('favoriteButton').attr({'data-href': job.url, 'id': 'favoriteButton', class: 'waves-effect waves-light btn'}).text('Add to Favorites')
     const $divGlassDoor = $('#glassDoor')
 
     $divJobFooter.append($backButton)
