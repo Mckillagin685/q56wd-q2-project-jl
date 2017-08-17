@@ -48,7 +48,9 @@ const favs = require('./routes/favs');
 const token = require('./routes/token');
 const users = require('./routes/users');
 const glassdoor = require('./routes/glassdoor');
+const jobs = require('./routes/jobs');
 
+app.use(jobs);
 app.use(favs);
 app.use(token);
 app.use(users);

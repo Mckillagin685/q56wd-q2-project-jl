@@ -6,7 +6,6 @@
       const $container = $('#favorites');
 
       for (const job of jobs) {
-         console.log(job);
         const $jobli = $('<li>');
         const $jobHeader = $('<div>').addClass('collapsible-header');
         const $jobHeaderJob = $('<div>').text(job.job_title);

@@ -5,33 +5,40 @@ $('#glassDoor').hide()
 let searchString = '';
 let jobs = []
 let jobList = []
-const getJobs = function(name) {
+const getJobs = function() {
 
   $('.progress').css('visibility', 'visible');
 
-  var $xhr = $.getJSON(`https://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`);
-  $xhr.done(function(data) {
-    if ($xhr.status !== 200) {
-      return;
-    }
+  const options = {
+          contentType: 'application/json',
+          data: JSON.stringify({'searchString': searchString}),
+          dataType: 'json',
+          type: 'GET',
+          url: '/jobs'
+        };
 
-    jobList = data.resultItemList;
+        $.ajax(options)
+          .done((data) => {
+            jobList = data.resultItemList;
 
-    const newJobs = [];
-    for (const item of jobList) {
-      const newItem = {
-        url: item.detailUrl,
-        title: item.jobTitle,
-        company: item.company,
-        location: item.location,
-        date: item.date
-      };
-      newJobs.push(newItem);
-    }
-    jobs = newJobs;
-    renderJobs();
-    $('.progress').css('visibility', 'hidden');
-  });
+            const newJobs = [];
+            for (const item of jobList) {
+              const newItem = {
+                url: item.detailUrl,
+                title: item.jobTitle,
+                company: item.company,
+                location: item.location,
+                date: item.date
+              };
+              newJobs.push(newItem);
+            }
+            jobs = newJobs;
+            renderJobs();
+            $('.progress').css('visibility', 'hidden');
+          })
+          .fail((err) => {
+            Materialize.toast(err.responseText, 3000);
+          });
   searchString = '';
 };
 
@@ -45,7 +52,7 @@ $("#getJobs").submit(function(event) {
 
   searchString = (title + '&city=' + location);
 
-  getJobs(name);
+  getJobs();
 });
 
 const renderJobs = function() {
