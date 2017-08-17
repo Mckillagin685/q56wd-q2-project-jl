@@ -429,7 +429,3 @@ $('html').click((event) => {
             });
   }
 })
-
-
-
-// note line 12 needs to be https
