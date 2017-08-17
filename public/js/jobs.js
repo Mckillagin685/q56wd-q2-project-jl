@@ -335,29 +335,6 @@ const renderJobs = function() {
               $row.append($('<td>').text(companyReview[greenDoorFRVals[i]]))
               $tableFURBody.append($row)
             }
-            // *****************************************************************
-
-            // const companyReview = company.featuredReview
-            // const $divReview = $('<div>').attr('id', 'companyReview')
-            //
-            // const $title = $('<div>').text("Title: " + companyReview.headline).attr('class', 'row')
-            // $divReview.append($title)
-            // const $rating = $('<p>').text('Overall Rating: ' + companyReview.overall).attr('class', 'row')
-            // $divReview.append($rating)
-            // const $date = $('<p>').text('Review Date: ' + companyReview.reviewDateTime).attr('class', 'row')
-            // $divReview.append($date)
-            // const $job = $('<p>').text('Reviewd By: ' + companyReview.jobTitle).attr('class', 'row')
-            // $divReview.append($job)
-            // const $location = $('<p>').text('Location: ' + companyReview.location).attr('class', 'row')
-            // $divReview.append($location)
-            // const $current = $('<p>').text('Currently Employed at this company: ' + companyReview.currentJob).attr('class', 'row')
-            // $divReview.append($current)
-            // const $pro = $('<div>').text("Pro's: " + companyReview.pros).attr('class', 'row')
-            // $divReview.append($pro)
-            // const $con = $('<div>').text("Con's: " + companyReview.cons).attr('class', 'row')
-            // $divReview.append($con)
-
-            // glassDoor.append($divReview)
           }
           renderCompany(company);
           $('#glassDoor').slideDown('slow')
