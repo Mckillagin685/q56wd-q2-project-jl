@@ -22,7 +22,7 @@
         const $jobDesc = $('<p>').text(job.job_description);
         const $divider5 = $('<div>').addClass('divider');
         const $link = $('<a>').addClass('btn').attr('href', job.url ).text('Apply Here');
-        const $del = $('<span>').attr({'id': 'deleteFav', 'data-id': job.id}).addClass('btn waves-light red right').text('delete favorite');
+        const $del = $('<span>').attr('data-id', job.id).addClass('btn waves-light red right deleteFav').text('delete favorite');
 
         $jobBody.append($jobCompany);
         $jobBody.append($divider1);
@@ -48,9 +48,24 @@
     });
 
     $('html').click((event) => {
-      console.log(event.target.attributes)
-      // if(event.target.attributes) {
-      //   console.log(event.target.attributes)
-      // }
+      if(event.target.attributes[1].value.includes('deleteFav')) {
+        var favId = event.target.attributes[0].value
+
+        const options = {
+          contentType: 'application/json',
+          data: JSON.stringify({'id': favId}),
+          dataType: 'json',
+          type: 'DELETE',
+          url: '/favs'
+        };
+
+        $.ajax(options)
+          .done((user) => {
+            window.location.href = '/favs.html';
+          })
+          .fail(($xhr) => {
+            Materialize.toast($xhr.responseText, 3000);
+          });
+      }
     })
 })();

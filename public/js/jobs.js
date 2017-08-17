@@ -356,7 +356,7 @@ $('html').click((event) => {
 
         $.ajax(options)
           .done(() => {
-            window.location.href = '/jobs.html';
+            Materialize.toast('Successfully added to favorites', 3000);
           })
           .fail(($xhr) => {
             Materialize.toast($xhr.responseText, 3000);

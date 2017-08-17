@@ -67,8 +67,8 @@ router.get('/favs/jobs', authorize, (req, res, next) => {
     });
 });
 
-router.delete('/favs/:id', authorize, (req, res, next) => {
-  const favId = Number.parseInt(req.body.bookId);
+router.delete('/favs', authorize, (req, res, next) => {
+  const favId = Number.parseInt(req.body.id);
 
   if (!Number.isInteger(favId)) {
     return next(boom.create(400, 'Favorite ID must be an integer'));
