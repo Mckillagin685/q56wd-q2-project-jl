@@ -1,3 +1,16 @@
+
+#searchForm {
+  padding: 50px 0 0 0;
+}
+
+#searchButton {
+  padding: 20px 0 0 30px;
+}
+
+#searchHeader {
+  padding: 0 0 20px 0;
+}
+
 img {
     max-width: 100%;
     max-height: 100%;

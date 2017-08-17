@@ -23,14 +23,14 @@
   <div class="navbar-fixed">
     <nav class="blue-grey darken-2">
       <div class="nav-wrapper">
-        <ul id="nav-mobile" class="left">
+        <!-- <ul id="nav-mobile" class="left">
           <li><a id="messagesModal" class="modal-trigger" href="#modal4">Messages</a></li>
-          <li><a class="modal-trigger" href="favs.html">Favorites</a></li>
-        </ul>
+        </ul> -->
         <a href="jobs.html" class="brand-logo">Job Search
              </a>
         <ul id="nav-mobile" class="right">
           <li id="greet"></li>
+          <li><a class="modal-trigger" href="favs.html">Favorites</a></li>
           <li id="log_status"></li>
         </ul>
       </div>
@@ -190,7 +190,8 @@
 
     <div class="container">
 
-      <div class="row">
+      <div id="searchForm" class="row">
+        <h5 id="searchHeader" class="center-align">Please type a Job Title and Zip Code below then click Search</h5>
         <form id="getJobs" class="col s12">
           <div class="row">
             <div class="input-field col s5">
@@ -199,11 +200,11 @@
             </div>
             <div class="input-field col s5">
               <input placeholder="Seattle, WA" id="location" type="text" class="validate" value="98104">
-              <label for="last_name">City, State</label>
+              <label for="last_name">Zip Code</label>
             </div>
             <div class="col s2">
-              <div class="valign-wrapper">
-                <div>
+                <div>  <!-- class="valign-wrapper" -->
+                <div id="searchButton">
                   <button type="submit" name="action">Search</button>
                 </div>
                 <div class="progress">
@@ -215,9 +216,9 @@
         </form>
       </div>
 
-      <div id="jobs" class="row"></div>
-
       <div id="job" class="row"></div>
+
+      <div id="jobs" class="row"></div>
 
       <div id="glassDoor" class="row"></div>
 

@@ -55,7 +55,7 @@ const renderJobs = function() {
   const $table = $('<table>').attr("class", "striped")
   const $thead = $('<thead>')
   let $tr = $('<tr>')
-  const $thTitle = $('<th>').text('Job Title')
+  const $thTitle = $('<th>').text('Job Title (click on a Title to view Job Details)')
   const $thCompany = $('<th>').text('Company')
   const $thLocation = $('<th>').text('Location')
   const $thDate = $('<th>').text('Date Posted')
@@ -92,6 +92,8 @@ const renderJobs = function() {
     event.preventDefault();
 
     $("#job").empty();
+
+    $('#searchForm').slideUp('slow')
 
     $('#jobs').slideUp('slow')
 
@@ -134,12 +136,15 @@ const renderJobs = function() {
     $table.append($tbody)
     jobsTable.append($table)
 
-
+    // const $tableHeader = $('<thead>')
+    // const $th = $('<th>')
+    // const $h3 = $('<h3>').text(Company Summary)
     let $jobTitle = $('<a>').text(jobTitle).attr({
       href: jobUrl,
       target: '_blank'
     })
-    let $Br = $('<br/>')
+    let $Br1 = $('<br/>')
+    let $Br2 = $('<br/>')
     let $aD = $('<a>').text('(click to view on Dice.com)').attr('class', 'black-text')
     let $tdT = $('<td>')
     let $tdC = $('<td>')
@@ -150,22 +155,17 @@ const renderJobs = function() {
     $tr = $('<tr>')
     let tBody = $('#jobTableBody')
 
-    // $tdT.append($jobTitle)
-    // $tdT.append($Br)
-    // $tdT.append($aD)
-
-// ******************************************************************
+    // $th.append($h3)
+    // $tableHeader.append($th)
     $tdT.append($jobTitle)
-    $tdT.append($Br)     //*********THIS DOSNT!!!!**************
+    $tdT.append($Br1)
     $tdT.append($aD)
-// ******************************************************************
+    console.log($tdT);
     $tr.append($tdT)
-
     $tdC.append($jobCompany)
-    $tdC.append($Br)      //*********THIS WORKS!!!!**************
+    $tdC.append($Br2)
     $tdC.append($aC)
     $tr.append($tdC)
-
     $tr.append($jobLocation)
     $tr.append($jobDate)
     tBody.append($tr)
@@ -188,6 +188,7 @@ const renderJobs = function() {
       $('#job').slideUp('slow')
       $('#jobs').slideDown('slow')
       $('#glassDoor').slideUp('slow')
+      $('#searchForm').slideDown('slow')
     })
 
     $("#getJobCompany").click(function(event) {
@@ -310,9 +311,10 @@ const renderJobs = function() {
               "Title:",
               "Overall Rating:",
               "Review Date:",
-              "Reviewd By:",
+              "Reviewed By:",
               "Location:",
-              "Currently Employed at this company:",
+              // "Currently Employed at this company:",
+              "Works here:",
               "Pro's:",
               "Con's:"
             ]
