@@ -202,18 +202,16 @@ const renderJobs = function() {
             const $tr = $('<tr>')
             const $tr1 = $('<tr>')
             const $tr2 = $('<tr>')
-            const $tr3 = $('<tr>')
-            const $tr4 = $('<tr>')
-            const $tr5 = $('<tr>')
-            const $tr6 = $('<tr>')
-            const $tr7 = $('<tr>')
-            const $tr8 = $('<tr>')
-            const $tr9 = $('<tr>')
-            const $tr10 = $('<tr>')
+            // const $tr3 = $('<tr>')
+            // const $tr4 = $('<tr>')
+            // const $tr5 = $('<tr>')
+            // const $tr6 = $('<tr>')
+            // const $tr7 = $('<tr>')
+            // const $tr8 = $('<tr>')
+            // const $tr9 = $('<tr>')
+            // const $tr10 = $('<tr>')
 
             const $aN = $('<a>').text(company.name).attr('href', company.featuredReview.attributionURL)
-            console.log(company);
-            console.log(company.featuredReview.attributionURL);
             const $tdN = $('<td>')
             $tdN.append($aN)
             $tr1.append($tdN)
@@ -222,11 +220,10 @@ const renderJobs = function() {
               height: "42",
               width: "42"
               })
-              // console.log(company);
+
             const $tdL = $('<td>')
             $tdL.append($img)
             $tr1.append($tdL)
-            console.log(company.website);
             const $aW = $('<a>').text(company.website).attr('href', ('http://' + company.website))
             const $tdW = $('<td>')
             $tdW.append($aW)
@@ -243,8 +240,6 @@ const renderJobs = function() {
 
             $table.append($tbody)
             glassDoor.append($table)
-
-            // fis first greenDoor Table
 
             const $divGDR = $('<div>').attr({id: 'greenDoorRatings', class: 'col s6'})
             const $tableGDR = $('<table>').attr('class', 'striped')
@@ -285,7 +280,6 @@ const renderJobs = function() {
               "seniorLeadershipRating"
             ]
 
-            // let tableGDR = $('#tableGDR')
             for (let i=0 ; i<greenDoorKeys.length ; i++) {
               const $row = $('<tr>')
               $row.append($('<td>').text(greenDoorKeys[i]))
@@ -293,6 +287,30 @@ const renderJobs = function() {
               $tableGDRBody.append($row)
             }
 
+            // const companyReview = company.featuredReview
+            //
+            // const greenDoorFRVals = [
+            //   "Title:",
+            //   "Overall Rating:",
+            //   "Review Date:",
+            //   "Reviewd By:",
+            //   "Location:",
+            //   "Currently Employed at this company:",
+            //   "Pro's:",
+            //   "Con's:"
+            // ]
+            //
+            // const greenDoorFRKeys = [
+            //   "companyReview.headline",
+            //   "companyReview.overall",
+            //   "companyReview.reviewDateTime",
+            //   "companyReview.jobTitle",
+            //   "workLifeBalanceRating",
+            //   "cultureAndValuesRating",
+            //   "compensationAndBenefitsRating",
+            //   "careerOpportunitiesRating",
+            //   "seniorLeadershipRating"
+            // ]
             // *****************************************************************
 
             // const companyReview = company.featuredReview
@@ -314,7 +332,7 @@ const renderJobs = function() {
             // $divReview.append($pro)
             // const $con = $('<div>').text("Con's: " + companyReview.cons).attr('class', 'row')
             // $divReview.append($con)
-            //
+
             // glassDoor.append($divReview)
           }
           renderCompany(company);
