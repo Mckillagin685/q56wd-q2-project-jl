@@ -11,9 +11,8 @@ const axios = require('axios');
 module.exports = router;
 
 router.get('/jobs', (req, res, next) => {
-  const searchString = req.body.searchString;
-
-  axios.get(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${searchString}`)
+  
+  axios.get(`http://service.dice.com/api/rest/jobsearch/v1/simple.json?text=${req.query.title}&city=${req.query.location}`)
   .then((resp) => {
     res.send(resp.data);
   })

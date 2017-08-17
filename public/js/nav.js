@@ -9,6 +9,7 @@ $(document).ready(function(){
   $.getJSON('/token')
     .done((loggedIn) => {
       const $greet = $('#greet');
+      const $favorites = $('#fav_tab')
       const $log = $('#log_status');
 
       if (loggedIn) {
@@ -18,6 +19,7 @@ $(document).ready(function(){
           const $helloUser = $('<a>').text('Hello, ' + firstName.firstName);
           $('#favModal').show()
           const $logout = $('<a>').text('Log out');
+          const $favA = $('<a>').attr('href', 'favs.html').text('Favorites')
 
           $logout.click((event) => {
             event.preventDefault();
@@ -37,7 +39,8 @@ $(document).ready(function(){
               });
           });
 
-          $greet.append($helloUser)
+          $greet.append($helloUser);
+          $favorites.append($favA);
           $log.append($logout);
         })
         .fail(($xhr) => {

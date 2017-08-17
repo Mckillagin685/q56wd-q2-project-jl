@@ -3,17 +3,17 @@
 $('#messagesModal').hide()
 $('#glassDoor').hide()
 
-let searchString = '';
 let jobs = []
 let jobList = []
-const getJobs = function() {
+const getJobs = function(title, location) {
 
   $('.progress').css('visibility', 'visible');
 
+  console.log(title, location);
 
   const options = {
           contentType: 'application/json',
-          data: JSON.stringify({'searchString': searchString}),
+          data: {'title': title, 'location': location},
           dataType: 'json',
           type: 'GET',
           url: '/jobs'
@@ -42,7 +42,6 @@ const getJobs = function() {
           .fail((err) => {
             Materialize.toast(err.responseText, 3000);
           });
-  searchString = '';
 };
 
 $("#getJobs").submit(function(event) {
@@ -53,9 +52,7 @@ $("#getJobs").submit(function(event) {
   var title = $('#title').val();
   var location = $('#location').val();
 
-  searchString = (title + '&city=' + location);
-
-  getJobs();
+  getJobs(title, location);
 });
 
 const renderJobs = function() {
