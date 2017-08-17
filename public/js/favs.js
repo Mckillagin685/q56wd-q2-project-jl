@@ -1,8 +1,9 @@
-$('#messagesModal').hide()
-$('#favModal').hide()
-
 (function() {
   'use strict';
+
+  $('#messagesModal').hide()
+  $('#favModal').hide()
+
 
   $.getJSON('/favs/jobs')
     .done((jobs) => {

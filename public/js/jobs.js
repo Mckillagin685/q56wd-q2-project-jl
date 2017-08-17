@@ -178,11 +178,19 @@ const renderJobs = function() {
 
     const $divJobFooter = $('<div>').attr('id', 'jobFooter')
     const $backButton = $('<button>').text('Back to Summary').attr('id', 'jobBackToJobs')
-    const $favoriteButton = $('<button>').attr({'data-href': job.url, 'id': 'favoriteButton'}).text('Add to Favorites')
+    const $favoriteButton = $('<button>').addClass('favoriteButton').attr({'data-href': job.url, 'id': 'favoriteButton'}).text('Add to Favorites')
     const $divGlassDoor = $('#glassDoor')
 
     $divJobFooter.append($backButton)
-    $divJobFooter.append($favoriteButton)
+    $.getJSON('/token')
+      .done((loggedIn) => {
+        if(loggedIn){
+          $divJobFooter.append($favoriteButton)
+        }
+      })
+      .fail((err) => {
+        Materialize.toast(err.responseText, 3000);
+      });
     jobsTable.append($divJobFooter)
     // jobsTable.append($divGlassDoor)
 
@@ -371,6 +379,25 @@ $('html').click((event) => {
           .fail(($xhr) => {
             Materialize.toast($xhr.responseText, 3000);
           });
+  }else if (event.target.attributes[1].value === 'getJob'){
+    var url = event.target.attributes[0].value;
+
+    const options = {
+            contentType: 'application/json',
+            data: {'url': url},
+            dataType: 'json',
+            type: 'GET',
+            url: '/dice/jobDesc'
+          };
+
+
+          $.ajax(options)
+            .done((data) => {
+
+            })
+            .fail((err) => {
+              Materialize.toast(err.responseText, 3000);
+            });
   }
 })
 
