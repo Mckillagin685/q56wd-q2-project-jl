@@ -1,3 +1,6 @@
+$('#messagesModal').hide()
+$('#favModal').hide()
+
 (function() {
   'use strict';
 

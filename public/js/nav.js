@@ -16,6 +16,7 @@ $(document).ready(function(){
           .done((firstName) => {
 
           const $helloUser = $('<a>').text('Hello, ' + firstName.firstName);
+          $('#favModal').show()
           const $logout = $('<a>').text('Log out');
 
           $logout.click((event) => {
