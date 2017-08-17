@@ -32,7 +32,7 @@ $(document).ready(function(){
 
             $.ajax(options)
               .done(() => {
-                window.location.href = '/jobs.html';
+                window.location.href = '/index.html';
               })
               .fail(() => {
                 Materialize.toast('Unable to log out. Please try again.', 3000);
