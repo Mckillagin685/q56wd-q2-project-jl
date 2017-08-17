@@ -394,7 +394,7 @@ const renderJobs = function() {
 }
 
 $('html').click((event) => {
-  if(event.target.attributes[0].value === 'favoriteButton'){
+  if(event.target.attributes[1].value === 'favoriteButton'){
     var url = event.target.parentNode.parentNode.children[0].children[1].children[0].children[0].children[0].attributes[0].value
 
         const options = {
