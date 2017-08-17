@@ -142,9 +142,6 @@ const renderJobs = function() {
     $table.append($tbody)
     jobsTable.append($table)
 
-    // const $tableHeader = $('<thead>')
-    // const $th = $('<th>')
-    // const $h3 = $('<h3>').text(Company Summary)
     let $jobTitle = $('<a>').text(jobTitle).attr({
       href: jobUrl,
       target: '_blank'
@@ -161,12 +158,10 @@ const renderJobs = function() {
     $tr = $('<tr>')
     let tBody = $('#jobTableBody')
 
-    // $th.append($h3)
-    // $tableHeader.append($th)
     $tdT.append($jobTitle)
     $tdT.append($Br1)
     $tdT.append($aD)
-    console.log($tdT);
+    // console.log($tdT);
     $tr.append($tdT)
     $tdC.append($jobCompany)
     $tdC.append($Br2)
@@ -214,11 +209,16 @@ const renderJobs = function() {
           const renderCompany = function(company) {
             const glassDoor = $('#glassDoor')
             const $table = $('<table>').attr('id', 'glassDoorTable')
+
+            const $tableHeader = $('<thead>')
+            const $th = $('<th>')
+            const $h3 = $('<h5>').text('Company Summary')
+
             const $tbody = $('<tbody>')
             const $tr = $('<tr>')
             const $tr1 = $('<tr>')
             const $tr2 = $('<tr>')
-            // const $tr3 = $('<tr>')
+            const $tr3 = $('<tr>')
             // const $tr4 = $('<tr>')
             // const $tr5 = $('<tr>')
             // const $tr6 = $('<tr>')
@@ -227,36 +227,65 @@ const renderJobs = function() {
             // const $tr9 = $('<tr>')
             // const $tr10 = $('<tr>')
 
-            const $aN = $('<a>').text(company.name).attr('href', company.featuredReview.attributionURL).attr('target', '_blank')
-            const $bR = $('<br/>')
-            const $aNC = $('<a>').text('(click to view on Glassdoor.com)').attr('class', 'black-text')
-            const $tdN = $('<td>')
-            $tdN.append($aN)
-            $tdN.append($bR)
-            $tdN.append($aNC)
-            $tr1.append($tdN)
+            $th.append($h3)
+            $tableHeader.append($th)
+            $table.append($tableHeader)
+
+
             const $img = $('<img>').attr({
               src: company.squareLogo,
-              height: "42",
-              width: "42"
+              height: "120",
+              width: "120"
               })
-
-            const $tdL = $('<td>')
+            const $tdL = $('<td rowspan="3">')
             $tdL.append($img)
             $tr1.append($tdL)
+
+            const $aNC = $('<b>').text('Glassdoor Link: ')
+            const $aN = $('<a>').text(company.name).attr('href', company.featuredReview.attributionURL).attr('target', '_blank')
+            // const $bR = $('<br/>')
+            const $tdN = $('<td>')
+            $tdN.append($aNC)
+            // $tdN.append($bR)
+            $tdN.append($aN)
+            $tr1.append($tdN)
+
+            const $tdIS = $('<b>').text('Industry: ')
+            const $tdIC = $('<span>').text('Industry: ' + company.industry)
+            const $tdI = $('<td>')
+            $tdI.append($tdIS)
+            $tdI.append($tdIC)
+            $tr1.append($tdI)
+            $tbody.append($tr1)
+
+            // *******************************************
+
             const $aW = $('<a>').text(company.website).attr('href', ('http://' + company.website)).attr('target', '_blank')
             const $tdW = $('<td>')
             $tdW.append($aW)
-            $tr1.append($tdW)
-            $tbody.append($tr1)
+            $tr2.append($tdW)
 
-            const $tdI = $('<td>').text('Industry: ' + company.industry)
-            $tr2.append($tdI)
-            const $tdS = $('<td>').text('Sector: ' + company.sectorName)
+
+            const $tdSB = $('<b>').text('Sector: ')
+            const $tdSS = $('<span>').text(company.sectorName)
+            const $tdS = $('<td>')
+            $tdS.append($tdSB)
+            $tdS.append($tdSS)
             $tr2.append($tdS)
-            const $tdNOR = $('<td>').text('Number of Ratings: ' + company.numberOfRatings)
-            $tr2.append($tdNOR)
             $tbody.append($tr2)
+
+            // ******************************************
+
+
+            const emptyTd = $('<td>')
+            const $tdNORB = $('<b>').text('Number of Ratings: ')
+            const $tdNORS = $('<span>').text(company.numberOfRatings)
+            const $tdNOR = $('<td>')
+            $tr3.append(emptyTd)
+            $tdNOR.append($tdNORB)
+            $tdNOR.append($tdNORS)
+            $tr3.append($tdNOR)
+            $tbody.append($tr3)
 
             $table.append($tbody)
             glassDoor.append($table)
