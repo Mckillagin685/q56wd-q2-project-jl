@@ -18,7 +18,7 @@ $(document).ready(function(){
 
           const $helloUser = $('<a>').text('Hello, ' + firstName.firstName);
           $('#favModal').show()
-          const $logout = $('<a>').text('Log out');
+          const $logout = $('<a>').text('Logout');
           const $favA = $('<a>').attr('href', 'favs.html').text('Favorites')
 
           $logout.click((event) => {
@@ -35,7 +35,7 @@ $(document).ready(function(){
                 window.location.href = '/index.html';
               })
               .fail(() => {
-                Materialize.toast('Unable to log out. Please try again.', 3000);
+                Materialize.toast('Unable to logout. Please try again.', 3000);
               });
           });
 
@@ -54,7 +54,7 @@ $(document).ready(function(){
 
         const $login = $('<a>')
           .attr({'href': '#loginModal', 'class': 'modal-trigger' })
-          .text('Log in');
+          .text('Login');
 
         $greet.append($signup);
         $log.append($login);

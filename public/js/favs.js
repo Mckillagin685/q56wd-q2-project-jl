@@ -3,10 +3,12 @@
 
   $('#messagesModal').hide()
   $('#favModal').hide()
+  $(".button-collapse").sideNav();
 
 
   $.getJSON('/favs/jobs')
     .done((jobs) => {
+      console.log(jobs);
       const $container = $('#favorites');
 
       for (const job of jobs) {

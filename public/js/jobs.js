@@ -2,6 +2,7 @@
 
 $('#messagesModal').hide()
 $('#glassDoor').hide()
+$(".button-collapse").sideNav();
 
 let jobs = []
 let jobList = []
@@ -63,7 +64,7 @@ const renderJobs = function() {
   const $table = $('<table>').attr("class", "striped")
   const $thead = $('<thead>')
   let $tr = $('<tr>')
-  const $thTitle = $('<th>').text('Job Title (click on a Title to view Job Details)')
+  const $thTitle = $('<th>').text('Job Title (click to view job details)')
   const $thCompany = $('<th>').text('Company')
   const $thLocation = $('<th>').text('Location')
   const $thDate = $('<th>').text('Date Posted')
@@ -130,7 +131,7 @@ const renderJobs = function() {
     const $thead = $('<thead>')
     let $tr = $('<tr>')
     const $thTitle = $('<th>').text('Job Title')
-    const $thCompany = $('<th>').text('Company')
+    const $thCompany = $('<th>').text('Company Review')
     const $thLocation = $('<th>').text('Location')
     const $thDate = $('<th>').text('Date Posted')
     const $tbody = $('<tbody>').attr('id', 'jobTableBody')
@@ -150,11 +151,11 @@ const renderJobs = function() {
     })
     let $Br1 = $('<br/>')
     let $Br2 = $('<br/>')
-    let $aD = $('<a>').text('(click to view on Dice.com)').attr('class', 'black-text')
+    let $aD = $('<a>').text('(click to view on dice.com)').attr('class', 'black-text')
     let $tdT = $('<td>')
     let $tdC = $('<td>')
     let $jobCompany = $('<a>').attr('id', 'getJobCompany').text(jobCompany).attr('class', 'waves-effect waves-light btn')
-    let $aC = $('<a>').text('(click to view Glassdoor Data)').attr('class', 'black-text')
+    let $aC = $('<a>').text('(click to view Glassdoor data)').attr('class', 'black-text')
     let $jobLocation = $('<td>').text(jobLocation)
     let $jobDate = $('<td>').text(jobDate)
     $tr = $('<tr>')
