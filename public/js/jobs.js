@@ -393,7 +393,7 @@ const renderJobs = function() {
   })
 }
 
-$('html').click((event) => {
+$('#job').click((event) => {
   if(event.target.attributes[1].value === 'favoriteButton'){
     var url = event.target.parentNode.parentNode.children[0].children[1].children[0].children[0].children[0].attributes[0].value
 
@@ -412,7 +412,11 @@ $('html').click((event) => {
           .fail(($xhr) => {
             Materialize.toast($xhr.responseText, 3000);
           });
-  }else if (event.target.attributes[1].value === 'getJob'){
+  }
+})
+
+$('#tableBody').click((event) => {
+  if (event.target.attributes[1].value === 'getJob'){
     var url = event.target.attributes[0].value;
 
     const options = {
