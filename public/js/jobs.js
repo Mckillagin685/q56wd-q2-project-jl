@@ -9,8 +9,6 @@ const getJobs = function(title, location) {
 
   $('.progress').css('visibility', 'visible');
 
-  // console.log(title, location);
-
   const options = {
           contentType: 'application/json',
           data: {'title': title, 'location': location},

@@ -39,7 +39,6 @@ router.post('/favs/addJobInfo', authorize, (req, res, next) => {
 
       result = {'location': location, 'employer': employer, 'job_title': jobTitle, 'job_description': jobDesc, 'job_skills': jobSkills, 'job_terms': jobTerms, 'post_age': postDate, 'job_url': url, 'user_id': req.claim.userId }
 
-      console.log(result);
       knex('favs')
         .insert(result, '*')
         .catch((err) => {
@@ -59,7 +58,6 @@ router.get('/favs/jobs', authorize, (req, res, next) => {
     .orderBy('favs.post_age', 'ASC')
     .then((rows) => {
       const userFavs = camelizeKeys(rows);
-      console.log('Here');
       res.send(decamelizeKeys(userFavs));
     })
     .catch((err) => {
