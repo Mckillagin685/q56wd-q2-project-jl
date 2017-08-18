@@ -3,6 +3,7 @@
 
   $('#messagesModal').hide()
   $('#favModal').hide()
+  $(".button-collapse").sideNav();
 
 
   $.getJSON('/favs/jobs')
