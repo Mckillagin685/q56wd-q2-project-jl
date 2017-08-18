@@ -152,6 +152,7 @@ const renderJobs = function() {
     let $Br1 = $('<br/>')
     let $Br2 = $('<br/>')
     let $aD = $('<a>').text('(click to view on dice.com)').attr('class', 'black-text')
+    let $open = $('<i>').text('open_in_new').attr('class', 'material-icons') //<i class="material-icons">open_in_new</i>
     let $tdT = $('<td>')
     let $tdC = $('<td>')
     let $jobCompany = $('<a>').attr('id', 'getJobCompany').text(jobCompany).attr('class', 'waves-effect waves-light btn')
@@ -162,13 +163,14 @@ const renderJobs = function() {
     let tBody = $('#jobTableBody')
 
     $tdT.append($jobTitle)
-    $tdT.append($Br1)
-    $tdT.append($aD)
+    // $tdT.append($Br1)
+    // $tdT.append($aD)
+    $tdT.append($open)
     // console.log($tdT);
     $tr.append($tdT)
     $tdC.append($jobCompany)
-    $tdC.append($Br2)
-    $tdC.append($aC)
+    // $tdC.append($Br2)
+    // $tdC.append($aC)
     $tr.append($tdC)
     $tr.append($jobLocation)
     $tr.append($jobDate)
